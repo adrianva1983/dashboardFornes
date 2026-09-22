@@ -260,27 +260,12 @@ function url_exists($url)
 						}
 					});					
 					if (!algun_otros)
-					{						
+					{
 						$('.otros').fadeOut();
 					}
-					if (parseFloat(res.home_canjeable)+parseFloat(res.home_acumulado)>=0)
+					if (total_acumulado>0)
 					{
-						var big_tot = 0;
-						var big_tot1 = parseFloat(res.home_canjeable)+parseFloat(res.home_acumulado);
-
-						if (res.home_canjeable < big_tot1) 
-						{
-							big_tot = big_tot1;
-						}
-						else 
-						{
-							big_tot = parseFloat(res.home_canjeable);
-						}
-						big_tot = big_tot.toFixed(2).replace('.',','); 
-						//html_result+='<div class="row ahorro_total"><div class="col-xs-12" ><img class="responsive" src="img/svg/ahorro/ahorro_total.svg"><p class="big_tot">'+(parseFloat(res.home_canjeable)+parseFloat(res.home_acumulado)).toFixed(2).replace('.',',')+' <span>&euro;</span></p> </div></div>';
-						
-						html_result+='<div class="row ahorro_total"><div class="col-xs-12" ><img class="responsive" src="img/svg/ahorro/ahorro_total.svg"><p class="big_tot">'+(parseFloat(res.home_canjeable)+parseFloat(res.home_acumulado)).toFixed(2).replace('.',',')+' <span>&euro;</span></p> </div></div>';
-						//html_result+='<div class="row ahorro_total"><div class="col-xs-12" ><img class="responsive" src="img/svg/ahorro/ahorro_total.svg"><p class="big_tot">'+big_tot+' <span>&euro;</span></p> </div></div>';
+						html_result+='<div class="row ahorro_total"><div class="col-xs-12" ><img class="responsive" src="img/svg/ahorro/ahorro_total.svg"><p class="big_tot">'+total_acumulado.toFixed(2).replace('.',',')+' <span>&euro;</span></p> </div></div>';
 					}
 					if (html_result!='') $('.wrapper-content-ahorro').append(html_result);
 
