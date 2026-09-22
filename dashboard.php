@@ -73,7 +73,7 @@ $idioma = $_SESSION['select_idioma'];
 	
 </head>
 
-<body class="no-skin-config dashboard-page" id="body">
+<body class="no-skin-config dashboard-page 111" id="body">
     <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
