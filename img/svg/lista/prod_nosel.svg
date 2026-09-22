@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="39"
+   height="39"
+   viewBox="0 0 39 39"
+   version="1.1"
+   id="svg849"
+   sodipodi:docname="prod_nosel.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <metadata
+     id="metadata853">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview851"
+     showgrid="false"
+     inkscape:zoom="13.74359"
+     inkscape:cx="19.5"
+     inkscape:cy="19.5"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg849" />
+  <defs
+     id="defs837">
+    <path
+       id="x7yla"
+       d="M305 319.5c0-4.7 3.8-8.5 8.5-8.5h22c4.7 0 8.5 3.8 8.5 8.5v22c0 4.7-3.8 8.5-8.5 8.5h-22a8.5 8.5 0 0 1-8.5-8.5z" />
+    <path
+       id="x7ylb"
+       d="M329.59 325.26a.81.81 0 0 1 1.18 0c.15.15.23.34.23.57 0 .23-.08.43-.23.58l-8.2 8.23-.1.1a.75.75 0 0 1-.58.26.75.75 0 0 1-.57-.26l-4.09-4.05a.78.78 0 0 1-.23-.57c0-.24.08-.43.23-.58a.81.81 0 0 1 1.18 0l3.47 3.46z" />
+  </defs>
+  <rect
+     style="opacity:0.81300001;fill:#ffffff;fill-opacity:1;stroke:#005e49;stroke-width:1.2784698;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect855"
+     width="37.676128"
+     height="37.761044"
+     x="0.74078023"
+     y="0.72861934"
+     ry="7.7854476" />
+</svg>

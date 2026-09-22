@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="59"
+   height="67"
+   viewBox="0 0 59 67"
+   version="1.1"
+   id="svg27"
+   sodipodi:docname="icon-marker-centro.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <metadata
+     id="metadata31">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1256"
+     inkscape:window-height="596"
+     id="namedview29"
+     showgrid="false"
+     inkscape:zoom="3.5223881"
+     inkscape:cx="29.5"
+     inkscape:cy="33.5"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg27" />
+  <defs
+     id="defs5">
+    <path
+       id="zo4la"
+       d="M312.5 424.3a25.12 25.12 0 0 1 25.08 21.9 25 25 0 0 1-18.88 27.35c-.45.1-.82.4-1.05.8l-4.42 7.95a.84.84 0 0 1-1.47 0l-4.41-7.97c-.23-.4-.6-.69-1.05-.8a25 25 0 0 1-18.82-27.33 25.12 25.12 0 0 1 25.02-21.9zm-7.71 52.2l4.07 7.36a4.15 4.15 0 0 0 7.28 0l4.07-7.36a28.28 28.28 0 0 0 20.52-31.09c-1.94-13.99-14-24.41-28.23-24.41a28.43 28.43 0 0 0-28.23 24.41 28.28 28.28 0 0 0 20.52 31.09z" />
+    <path
+       id="zo4lb"
+       d="M312.5 455.76l-.5 1.75s-.31 2.49-2.38 2.49H302l1.44-7.1s.34-.98 1.89-1.47c0 0-3.96.42-5.22-2.4L298 439h10.72c2.79.97 3.28 3.4 3.28 3.4l.5 2.45.5-2.44s.5-2.44 3.28-3.41H327l-2.12 10.04c-1.26 2.8-5.22 2.4-5.22 2.4 1.55.48 1.9 1.47 1.9 1.47l1.43 7.09h-7.6c-2.08 0-2.4-2.49-2.4-2.49z" />
+    <path
+       id="zo4lc"
+       d="M312.5 445.65s.92-2.45 3.14-2.45h7.21l-1.38 6.64s-.79 2.37-4.4 2.1c0 0 1.25.31 1.4 1.34l.87 3.92h-5.55s-1.3 0-1.3-1.07c0 0 0 1.07-1.33 1.07h-5.46l.83-3.92s.33-1.03 1.39-1.34c0 0-3.75.22-4.35-2.1l-1.43-6.64h7.21c2.13 0 3.15 2.45 3.15 2.45" />
+  </defs>
+  <g
+     id="g11"
+     transform="translate(-283,-420)">
+    <use
+       xlink:href="#zo4la"
+       id="use7"
+       style="fill:#005e49"
+       x="0"
+       y="0"
+       width="100%"
+       height="100%" />
+    <use
+       stroke-miterlimit="50"
+       xlink:href="#zo4la"
+       id="use9"
+       style="fill:#ffffff;fill-opacity:0;stroke:#005e49;stroke-miterlimit:50"
+       x="0"
+       y="0"
+       width="100%"
+       height="100%" />
+  </g>
+  <g
+     transform="matrix(1.3086726,0,0,1.4088135,13.308965,10.779661)"
+     id="g4">
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#030104"
+       d="M 23.077,21.154 C 23.077,23.796 17.594,25 12.5,25 7.406,25 1.923,23.796 1.923,21.154 c 0,-2.033 3.025,-2.992 5.562,-3.439 0.525,-0.091 1.022,0.258 1.114,0.781 0.092,0.523 -0.257,1.022 -0.78,1.114 -3.06,0.537 -3.924,1.379 -3.974,1.559 0.147,0.504 3.032,1.908 8.655,1.908 5.623,0 8.508,-1.404 8.656,-1.938 -0.051,-0.15 -0.92,-0.997 -4.002,-1.533 -0.523,-0.091 -0.873,-0.59 -0.782,-1.113 0.091,-0.522 0.581,-0.871 1.113,-0.782 2.551,0.445 5.592,1.402 5.592,3.443 z M 8.654,15.385 h 0.961 v 5.769 c 0,0.53 0.432,0.961 0.962,0.961 h 3.846 c 0.53,0 0.962,-0.432 0.962,-0.961 v -5.769 h 0.961 c 0.53,0 0.962,-0.432 0.962,-0.962 V 8.654 C 17.308,8.162 16.536,7.082 15.196,6.926 14.646,6.821 13.585,6.746 12.515,6.746 11.435,6.745 10.359,6.821 9.803,6.926 8.464,7.083 7.692,8.163 7.692,8.654 v 5.769 c 0,0.53 0.432,0.962 0.962,0.962 z M 12.5,5.769 c 1.593,0 2.885,-1.292 2.885,-2.885 C 15.385,1.292 14.093,0 12.5,0 10.907,0 9.615,1.292 9.615,2.885 c 0,1.593 1.292,2.884 2.885,2.884 z"
+       id="path2" />
+  </g>
+</svg>

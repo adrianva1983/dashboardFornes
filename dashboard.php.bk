@@ -1,0 +1,311 @@
+﻿<?php
+require($_SERVER['DOCUMENT_ROOT']."/dashboard/Scripts-Gestion/conexion.php");
+//Comprobamos el acceso
+require($_SERVER['DOCUMENT_ROOT']."/dashboard/Scripts-Gestion/aut_verifica.inc.php");
+if (!isset($_SESSION['cod_cliente'])||$_SESSION['cod_cliente']=='')
+{
+	header ("Location: $redir?error_login=5");
+	exit;
+}
+if ($_SERVER['HTTP_REFERER'] == "")
+{
+	Header ("Location: index.php?error_login=1");
+	die ("Error cod.:1 - Acceso incorrecto!");
+	exit;
+}
+$idioma = "es-es";
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cuadro de mandos masymas</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+	
+	<!-- FooTable -->
+    <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+	<link href="css/custom.css" rel="stylesheet">
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Sparkline -->
+    <script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+	<!-- Flot -->
+    <script src="js/plugins/flot/jquery.flot.js"></script>
+    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="js/plugins/flot/jquery.flot.time.js"></script>
+
+    <!-- Peity -->
+    <script src="js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="js/demo/peity-demo.js"></script>
+	
+	<!-- Chartjs -->
+	<script src="js/plugins/chartJs/Chart.min.js"></script>
+	
+	<!-- FooTable -->
+    <script src="js/plugins/footable/footable.all.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+	
+</head>
+
+<body class="no-skin-config dashboard-page">
+    <div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                            <img alt="image" src="/Plantillas/Imagenes/logo.svg" />
+                             </span>
+                    </div>
+                    <div class="logo-element">
+                        +
+                    </div>
+                </li>
+				<?php
+					$seccion = "dashboard";
+					require($_SERVER['DOCUMENT_ROOT']."/dashboard/herramientas/menu.php");
+				?>
+            </ul>
+
+        </div>
+    </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        </div>
+		<?php
+		require($_SERVER['DOCUMENT_ROOT']."/dashboard/herramientas/menu-top.php");		
+		?>
+
+        </nav>
+        </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+				<div class="row">
+					<div class="col-lg-7 col-xs-12">
+						<a href="/dashboard/ahorro.php" id="bloque-cheque-ahorro-dashboard">
+						<div class="col-lg-12">
+							<div class="widget style1 navy-bg">
+								<div class="row">
+									<div class="col-xs-4">
+										<img src="img/hucha.svg" alt="Cheque ahorro">
+									</div>
+									<div class="col-xs-8 text-right">	
+										<div id="acum" style="display:none">
+											<p>Saldo canjeable</p>
+											<p class="saldo"></p>
+										</div>
+										<p class="precio puntos_cheque"></p>										
+										<h3 class="ahorrar" style="display:none">Comienza a Ahorrar</h3>
+										<span class="fecha_cheque"></span>										
+										<h2>Mi ChequeAhorro</h2>										
+									</div>
+								</div>
+							</div>
+						</div>
+						</a>
+						<div class="col-lg-12">
+							<div class="ibox-content text-center">
+								<h1>Compras en 30 días</h1>
+								<div class="compra_30_dias"><canvas id="barChart" height="140"></canvas></div>
+								<?php
+								$array_meses = array("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic");
+								$datos_barchar = "[";
+								$labels_barchar = "[";
+								for ($i=1;$i<31;$i++)
+								{
+									if ($i>1) 
+									{
+										$datos_barchar .= ",";	
+										$labels_barchar .= ",";	
+									}									
+									$requete = "SELECT SUM(`IMPORTE_TOTAL_NETO`) AS TOTAL FROM `Cabeceras` WHERE (";
+									$primero = true;
+									$requete2 = "SELECT `id_card` FROM `ClientesTarjetas` WHERE `id_home`=".$_SESSION['id_home']." AND `is_erased`=0";																		
+									$result2 = mysqli_query($db,$requete2);	
+									if (($result2) && (mysqli_num_rows($result2)>0))
+									{
+										while ($listado2 = mysqli_fetch_object($result2))
+										{
+											if ($primero) $primero = false;
+											else $requete.=" OR ";											
+											$requete.= "`COD_TARJETA`=".$listado2->id_card;
+										}
+									}
+									$requete.=") AND `FECHA`='".date('Y-m-d',strtotime("-".$i." days"))."'";										
+									$result = mysqli_query($db,$requete);								
+									$labels_barchar .= '"'.date('d',strtotime("-".$i." days")).' '.$array_meses[intval(date('m',strtotime("-".$i." days")))-1].'"';
+									if (($result) && (mysqli_num_rows($result)>0))
+									{
+										$listado = mysqli_fetch_object($result);
+										if ($listado->TOTAL!='') $datos_barchar .= number_format($listado->TOTAL,2,".","");
+										else $datos_barchar .= 0;
+									}
+									else $datos_barchar .=0;
+								}
+								$datos_barchar .= "]";
+								$labels_barchar .= "]";
+								?>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-5 col-xs-12">												
+						<div class="col-lg-12">
+							<div class="widget style1 navy-bg">
+								<div class="row">
+									<div class="col-xs-3">
+										<img src="img/svg/movil.svg" alt="app movil">
+									</div>
+									<div class="col-xs-9 text-right">							
+										<span>Descárgate nuestra</span>
+										<h2>APP móvil</h2>
+										<div class="btn-group botonera-app">
+											<a class="btn btn-white" onclick="abre_dialogo_app();return false;" href="#"><i class="fa fa-apple"></i> App Store</a>
+											<a class="btn btn-white" onclick="abre_dialogo_app();return false;" href="#"><i class="fa fa-android"></i> Google Play</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-lg-12">
+							<div id="fb-root"></div>
+							<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v3.2"></script>
+							<div class="fb-page" data-href="http://www.facebook.com/masymasfornes" data-tabs="timeline" data-width="500" data-height="315" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="http://www.facebook.com/masymasfornes" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/masymasfornes">Supermercados masymas Fornés</a></blockquote></div>						
+						</div>
+					</div>
+				</div>				
+			</div>
+        
+        </div>
+
+    </div>
+	<div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content animated flipInY">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+					<i class="fa fa-mobile modal-icon"></i>
+					<h4 class="modal-title">Inst&aacute;late nuestra app m&oacute;vil</h4>					
+				</div>
+				<div class="modal-body">
+					<p>Disponible para iOS y Android.</p>				
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+					<a class="btn btn-primary" target="_blank" href="#"><i class="fa fa-apple"></i> Versi&oacute;n iOS</a>
+					<a class="btn btn-primary" target="_blank" href="#"><i class="fa fa-android"></i> Versi&oacute;n Android</a>
+				</div>
+			</div>
+		</div>
+	</div>
+    <script>
+	function abre_dialogo_app()
+	{
+		$('#myModal3').modal();
+	}
+	function obtener_chequeahorro()
+	{
+		$.ajax({
+			type:'GET',
+			timeout: 3000,
+			dataType: 'json',
+			url:'http://fornes.semillaproyectos.com/servicios-web/obtener_chequeahorro.php?key_acceso=c5zwCl4e1vw5oY609T5GX4rD71UVx1Rf&id_home=<?php print $_SESSION['id_home'];?>&cod_cliente=<?php print $_SESSION['cod_cliente'];?>&anticache='+(new Date()).getTime(),
+			success:function(res, textStatus, XMLHttpRequest)
+			{
+				 var resultado_ajax ='';
+				 $.each(res, function(key, value) 
+				 {
+					 if (res.validacion=='ok')
+					 {
+						 localStorage.setItem('puntos_cheque',res.puntos);
+						 localStorage.setItem('fecha_cheque',res.fecha);
+						 $('.fecha_cheque').html(res.fecha);
+						 var ahorro_total_actual = parseFloat(res.ahorro_total_actual);
+						 var ahorro_total_anterior = parseFloat(res.ahorro_total_anterior);
+						 if (ahorro_total_actual>0)
+						 {
+							 $('.ahorrar').hide();
+							 $('.puntos_cheque').show();
+							 $('.puntos_cheque').html(ahorro_total_actual.toFixed(2).replace('.',',')+'<span>€</span>');
+						 }
+						 else if (ahorro_total_anterior<=0)
+						 {
+							 $('.puntos_cheque').hide();
+							 $('.ahorrar').show();
+						 }
+						 if (ahorro_total_anterior>0)
+						 {
+							 $('#acum .saldo').html(ahorro_total_anterior.toFixed(2).replace('.',',')+' &euro;');
+							 $('#acum').show();
+						 }
+					 }
+					 else
+					 {
+					 }
+				 });			 
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) 
+			{
+			}
+		});
+	}
+	$(document).ready(function() {
+		obtener_chequeahorro();
+		$('.footable').footable();
+		var barData = {				
+			labels: <?php print $labels_barchar;?>,
+			datasets: [
+						{
+						label: "Consumo",
+						fillColor: "rgba(2,108,80,1)",
+						strokeColor: "rgba(220,220,220,0.8)",
+						highlightFill: "rgba(2,108,80,0.75)",
+						highlightStroke: "rgba(220,220,220,1)",
+						data: <?php print $datos_barchar;?>
+						}
+					]
+				};
+				var barOptions = {
+					scaleBeginAtZero: true,
+					scaleShowGridLines: true,
+					scaleGridLineColor: "rgba(0,0,0,.05)",
+					scaleGridLineWidth: 1,
+					barShowStroke: true,
+					barStrokeWidth: 2,
+					barValueSpacing: 5,
+					barDatasetSpacing: 1,
+					responsive: true
+				}
+
+				var ctx = document.getElementById("barChart").getContext("2d");
+				var myNewChart = new Chart(ctx).Bar(barData, barOptions);
+	});
+    </script>	
+</body>
+</html>
+<?php
+require($_SERVER['DOCUMENT_ROOT']."/dashboard/Scripts-Gestion/cierre.php");
+?>

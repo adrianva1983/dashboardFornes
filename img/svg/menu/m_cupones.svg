@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="35"
+   height="33"
+   viewBox="0 0 35 33"
+   version="1.1"
+   id="svg1010"
+   sodipodi:docname="m_cupones.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <metadata
+     id="metadata1014">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview1012"
+     showgrid="false"
+     inkscape:zoom="7.1515152"
+     inkscape:cx="17.5"
+     inkscape:cy="16.5"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1010" />
+  <defs
+     id="defs992">
+    <path
+       id="443la"
+       d="M67 189.5a11.5 11.5 0 1 1-23 0 11.5 11.5 0 0 1 23 0z" />
+    <path
+       id="443lb"
+       d="M79 199.5a11.5 11.5 0 1 1-23 0 11.5 11.5 0 0 1 23 0z" />
+    <path
+       id="443lc"
+       d="M63.54 190.42L55.45 201l-.99-.76 8.09-10.57zm-9.52 1.5a2.18 2.18 0 1 1 4.36 0 2.18 2.18 0 0 1-4.36 0zm1.25 0a.93.93 0 1 0 1.87-.01.93.93 0 0 0-1.87 0zm4.35 6.84a2.18 2.18 0 1 1 4.36 0 2.18 2.18 0 0 1-4.36 0zm1.25 0a.93.93 0 1 0 1.87 0 .93.93 0 0 0-1.87 0zM73 188.8v13.07a2.8 2.8 0 0 1-2.8 2.8H47.8a2.8 2.8 0 0 1-2.8-2.8V188.8a2.8 2.8 0 0 1 2.8-2.8h22.4a2.8 2.8 0 0 1 2.8 2.8zm-1.24 0c0-.86-.7-1.56-1.56-1.56H47.8c-.86 0-1.56.7-1.56 1.56v13.07c0 .85.7 1.55 1.56 1.55h22.4c.86 0 1.56-.7 1.56-1.55z" />
+  </defs>
+  <g
+     id="g1006"
+     transform="translate(-44,-178)">
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#005e49"
+       id="use1002"
+       xlink:href="#443lc" />
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#ffffff;fill-opacity:0;stroke:#005e49;stroke-miterlimit:50"
+       id="use1004"
+       xlink:href="#443lc"
+       stroke-miterlimit="50" />
+  </g>
+</svg>

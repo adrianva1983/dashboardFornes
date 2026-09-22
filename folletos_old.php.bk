@@ -1,0 +1,218 @@
+<?php
+require($_SERVER['DOCUMENT_ROOT']."/dashboard/Scripts-Gestion/conexion.php");
+//Comprobamos el acceso
+require($_SERVER['DOCUMENT_ROOT']."/dashboard/Scripts-Gestion/aut_verifica.inc.php");
+if (!isset($_SESSION['cod_cliente'])||$_SESSION['cod_cliente']=='')
+{
+	header ("Location: $redir?error_login=5");
+	exit;
+}
+if ($_SERVER['HTTP_REFERER'] == "")
+{
+	Header ("Location: index.php?error_login=1");
+	die ("Error cod.:1 - Acceso incorrecto!");
+	exit;
+}
+//$idioma = "es-es";
+$idioma = $_SESSION['select_idioma'];
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Folletos masymas</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+	
+	<!-- FooTable -->
+    <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+	<link href="css/custom.css" rel="stylesheet">
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Sparkline -->
+    <script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+	<!-- Flot -->
+    <script src="js/plugins/flot/jquery.flot.js"></script>
+    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="js/plugins/flot/jquery.flot.time.js"></script>
+
+    <!-- Peity -->
+    <script src="js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="js/demo/peity-demo.js"></script>
+	
+	<!-- Chartjs -->
+	<script src="js/plugins/chartJs/Chart.min.js"></script>
+	
+	<!-- FooTable -->
+    <script src="js/plugins/footable/footable.all.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+	
+</head>
+
+<body class="no-skin-config dashboard-page">
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element"> <span>
+                                <img alt="image" src="/Plantillas/Imagenes/logo.svg" />
+                                </span>
+                        </div>
+                        <div class="logo-element">
+                            +
+                        </div>
+                    </li>
+                    <?php
+                        $seccion = "folleto";
+                        require($_SERVER['DOCUMENT_ROOT']."/dashboard/herramientas/menu.php");
+                    ?>
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    </div>
+                    <?php
+                    require($_SERVER['DOCUMENT_ROOT']."/dashboard/herramientas/menu-top.php");		
+                    ?>
+                </nav>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="unidad_familiar_perfil">
+                    <h2 tkey="Datos_perfil1">Folletos</h2>
+                </div>
+                <h3 id="slider-folletos-h3">&nbsp;</h3>        
+                <!--<div class="slider-nav" id="slider-folletos"></div>-->
+                <div class="slider-nav" id="slider-folletos-sinslider"></div>
+			</div>
+			<div class="footer">
+                <div class="pull-right">
+                    <strong>masymas</strong>
+                </div>
+                <div>
+                    <strong>Copyright</strong> <a href="http://www.semillaproyectos.com" tkey="Supermercados_masymas">Semilla Proyectos Internet &copy;</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+	<script src="/dashboard/lang/lang.js" type="text/javascript"></script>
+	<script src="/dashboard/lang/es.js" type="text/javascript"></script>
+	<script src="/dashboard/lang/en.js" type="text/javascript"></script>
+	<script src="/dashboard/lang/va.js" type="text/javascript"></script>
+    <script>
+        function obtener_folletos()
+        {
+            $.ajax({
+            type:'GET',
+            timeout: 3000,
+            dataType: 'json',	
+            url:'https://www.appfornes.es/servicios-web/folletos_activos.php?key_acceso=c5zwCl4e1vw5o21da2edvasUVx1Rf&idioma=es',
+            
+            success:function(res, textStatus, XMLHttpRequest)
+            {			
+                //added
+                listado_folletos=res;				
+                var resultado_slider='';
+                var paginas_folletos = [];
+                var paginas_descargas = [];
+                var primera = true;
+                var indice = 0;
+                $.each(res, function(key, value) 
+                {
+                    resultado_slider+='<div class="item center_text col-12"><a  href="folleto_detalle.php?folleto_activo='+indice+'">';
+                    resultado_slider+='<img src="https://www.appfornes.es/Imagenes/'+value.Portada+'" alt="image"  draggable="false"/>';
+                    resultado_slider+='<h5>'+value.Nombre+'</h5>';
+                    resultado_slider+='<p>'+value.Breve+'</p>';
+                    resultado_slider+='</a></div>';		
+                    var array_paginas = []
+                    $.each(value.Paginas, function(key2, value2)
+                    {
+                        var tmp = [];
+                        tmp['Titulo'] = value2.Titulo;
+                        tmp['Imagen'] = value2.Imagen;				
+                        array_paginas.push(tmp);				
+                    });
+                    paginas_folletos.push(array_paginas);
+                    var array_descargas = [];
+                    $.each(value.Descargas, function(key2,value2)
+                    {
+                        var tmp =[];
+                        tmp['Titulo'] = value2.Titulo;
+                        if (value2.Descarga!='') tmp['Descarga'] = 'https://www.supermasymas.com/Recursos/'+value2.Descarga;
+                        else tmp['Descarga'] = '';
+                        array_descargas.push(tmp);
+                    });
+                    paginas_descargas.push(array_descargas);
+                    indice++;
+                });
+                console.log(paginas_folletos);
+                localStorage.setItem('slider-folletos-sinslider',resultado_slider);
+                $('#slider-folletos-sinslider').html(resultado_slider);		
+                numero_folletos = listado_folletos.length;
+                if (listado_folletos.length==1)
+                {
+                    //Quitamos el último registro de navegación para que no vuelva al listado
+                    origen_array.pop();
+                    origen_subseccion.pop();
+                    origen_altura.pop();
+                    //solo un folleto activo
+                    cambiar_pagina('pagina-portada','pagina-folletos-vista');
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) 
+            {
+                $('#folletos-listado').html('<div class="alert alert-danger">'+temp_lang['ErrorConexion']+'</div>');
+                /*
+                $('#folletos-listado').html(localStorage.getItem('folletos-listado'));		
+                $('#slider-folletos-sinslider').html(localStorage.getItem('slider-folletos-sinslider'));		
+                $('.slider-nav').slick({
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                asNavFor: '.slider-for',
+                dots: false,
+                centerMode: true,
+                focusOnSelect: true,
+                autoplay: false          
+                });
+                */
+            }	
+            });
+        }
+	
+        $(document).ready(function() {
+            
+            obtener_folletos();
+            
+        });
+    </script>	
+</body>
+</html>
+<?php
+require($_SERVER['DOCUMENT_ROOT']."/dashboard/Scripts-Gestion/cierre.php");
+?>

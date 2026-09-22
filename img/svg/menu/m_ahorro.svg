@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="35"
+   height="33"
+   viewBox="0 0 35 33"
+   version="1.1"
+   id="svg877"
+   sodipodi:docname="m_ahorro.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <metadata
+     id="metadata881">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview879"
+     showgrid="false"
+     inkscape:zoom="16.242424"
+     inkscape:cx="17.5"
+     inkscape:cy="16.5"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg877" />
+  <defs
+     id="defs853">
+    <path
+       id="5gk6a"
+       d="M67 234.5a11.5 11.5 0 1 0-23 0 11.5 11.5 0 0 0 23 0z" />
+    <path
+       id="5gk6b"
+       d="M79 244.5a11.5 11.5 0 1 0-23 0 11.5 11.5 0 0 0 23 0z" />
+    <path
+       id="5gk6c"
+       d="M62.76 236.33h-.06c-1.12-.21-2.3-.21-3.4 0-.22.04-.43-.13-.46-.38-.04-.25.1-.5.33-.53 1.2-.23 2.45-.23 3.66 0 .22.04.36.28.33.53-.03.22-.2.38-.4.38z" />
+    <path
+       id="5gk6d"
+       d="M68.16 252.58H65.3a1.2 1.2 0 0 1-1.2-1.21v-.67c-2.09.6-4.42.6-6.54.02v.65a1.2 1.2 0 0 1-1.18 1.21h-2.86a1.2 1.2 0 0 1-1.2-1.21v-3.84a8.33 8.33 0 0 1-1.42-2.31h-1.04A1.89 1.89 0 0 1 48 243.3v-1.55c0-1.05.84-1.9 1.86-1.9h.9a8.6 8.6 0 0 1 2.56-3.66c-.08-2.69-.9-3.11-.9-3.11-.24-.05-.37-.24-.38-.48 0-.25.2-.46.43-.52.04 0 .38-.09.86-.09.93 0 2.52.3 3.35 2.26 1.3-.46 2.67-.7 4.1-.7 5.7 0 10.35 3.86 10.45 8.64 1.26-.36 1.6-.66 1.66-.71a.5.5 0 0 1 .37-.23.5.5 0 0 1 .46.2c.05.07.46.68.19 1.5-.32.93-1.4 1.68-3.24 2.23a8.31 8.31 0 0 1-1.33 2.2v3.98a1.2 1.2 0 0 1-1.18 1.21zm-3.54-3.11c.1 0 .2.03.3.1.13.1.2.25.2.42v1.38c0 .1.08.17.18.17h2.86c.09 0 .17-.08.17-.17v-4.17c0-.13.04-.25.13-.34.6-.7 1.06-1.47 1.36-2.28a.51.51 0 0 1 .34-.32c2.01-.57 2.6-1.2 2.76-1.58-.45.22-1.11.46-2.1.7a.5.5 0 0 1-.45-.1.53.53 0 0 1-.18-.44l.02-.48c0-4.28-4.23-7.76-9.43-7.76a11 11 0 0 0-4.21.82.5.5 0 0 1-.4-.01.52.52 0 0 1-.28-.32c-.45-1.46-1.37-1.93-2.19-2.03.33.64.62 1.67.64 3.37 0 .16-.07.32-.19.42a7.53 7.53 0 0 0-2.53 3.67.51.51 0 0 1-.49.37h-1.27a.86.86 0 0 0-.84.87v1.55c0 .48.38.86.84.86h1.39c.21 0 .4.14.48.35.31.89.81 1.71 1.48 2.45.09.1.14.23.14.36v4.04c0 .1.07.17.17.17h2.86c.09 0 .17-.08.17-.17v-1.34c0-.17.07-.33.2-.43a.5.5 0 0 1 .46-.07 11.13 11.13 0 0 0 7.24-.03c.06-.02.11-.03.17-.03z" />
+  </defs>
+  <g
+     id="g867"
+     transform="translate(-44,-223)">
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#005e49"
+       id="use863"
+       xlink:href="#5gk6c" />
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#ffffff;fill-opacity:0;stroke:#005e49;stroke-miterlimit:50"
+       id="use865"
+       xlink:href="#5gk6c"
+       stroke-miterlimit="50" />
+  </g>
+  <g
+     id="g873"
+     transform="translate(-44,-223)">
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#005e49"
+       id="use869"
+       xlink:href="#5gk6d" />
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#ffffff;fill-opacity:0;stroke:#005e49;stroke-miterlimit:50"
+       id="use871"
+       xlink:href="#5gk6d"
+       stroke-miterlimit="50" />
+  </g>
+</svg>

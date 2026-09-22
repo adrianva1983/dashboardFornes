@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="46"
+   height="30"
+   viewBox="0 0 46 30"
+   version="1.1"
+   id="svg1406"
+   sodipodi:docname="fecha_nac.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <metadata
+     id="metadata1410">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview1408"
+     showgrid="false"
+     inkscape:zoom="12.633641"
+     inkscape:cx="28.905894"
+     inkscape:cy="13.608984"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1406" />
+  <defs
+     id="defs1390">
+    <linearGradient
+       id="linearGradient1416"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#005e49;stop-opacity:1;"
+         offset="0"
+         id="stop1414" />
+    </linearGradient>
+    <path
+       id="83zba"
+       d="M29 538.56a2.56 2.56 0 0 1 2.56-2.56h38.08a2.56 2.56 0 0 1 2.56 2.56v22.08a2.56 2.56 0 0 1-2.56 2.56H31.56a2.56 2.56 0 0 1-2.56-2.56z" />
+    <path
+       d="M50 225.75a3.47 3.47 0 1 1-.01 6.93 3.47 3.47 0 0 1 .01-6.93zm5.2 3.46a5.21 5.21 0 1 0-10.42 0 5.21 5.21 0 0 0 10.43 0zm3.05 15.51h-16.5v-4.05c0-1.03.4-2.03 1.07-2.69.34-.34.91-.75 1.72-.72.44.01 1.83 0 3.5-.01l7.31-.03c2 0 2.9 1.62 2.9 3.13zm-10.21-9.22l-3.48.01a4.12 4.12 0 0 0-2.96 1.22c-1 .98-1.6 2.45-1.6 3.94v4.92c0 .48.4.88.87.88h18.26c.48 0 .87-.4.87-.88v-5.24c0-2.36-1.63-4.88-4.65-4.88l-7.31.03z"
+       id="g41ua" />
+    <path
+       d="M50.9 398.9c0 .58-.38.68-.6.68h-9.62a.59.59 0 0 1-.43-.15c-.15-.14-.22-.42-.22-.79v-6.2H50.9v6.45zm-10.87-8.8c0-.54.2-.77.68-.78h.99v.76a.51.51 0 1 0 1.02 0v-.76h5.42v.76a.51.51 0 1 0 1.02 0v-.76h1.03c.25.01.43.08.54.2.16.17.19.45.18.54v1.36H40.03v-1.33zm11.47-1.26c-.22-.24-.6-.52-1.3-.54h-1.04v-.79a.51.51 0 1 0-1.02 0v.79h-5.42v-.79a.51.51 0 1 0-1.03 0v.79h-.98c-.83 0-1.71.48-1.71 1.8v8.54c0 .66.17 1.17.52 1.52.3.3.7.45 1.15.45h9.62c.66 0 1.64-.46 1.64-1.71v-8.8c.01-.14.01-.77-.43-1.26z"
+       id="5plca" />
+  </defs>
+  <use
+     id="use855"
+     xlink:href="#5plca"
+     style="fill:#005e49;fill-opacity:1"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     transform="matrix(1.6498926,0,0,1.6498926,-52.014387,-634.73183)" />
+</svg>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="35"
+   height="33"
+   viewBox="0 0 35 33"
+   version="1.1"
+   id="svg1628"
+   sodipodi:docname="m_folletos.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <metadata
+     id="metadata1632">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview1630"
+     showgrid="false"
+     inkscape:zoom="16.242424"
+     inkscape:cx="17.5"
+     inkscape:cy="16.5"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1628" />
+  <defs
+     id="defs1612">
+    <path
+       id="u7tya"
+       d="M42 347.5a11.5 11.5 0 1 1 23 0 11.5 11.5 0 0 1-23 0z" />
+    <path
+       id="u7tyb"
+       d="M54 337.5a11.5 11.5 0 1 1 23 0 11.5 11.5 0 0 1-23 0z" />
+    <path
+       id="u7tyc"
+       d="M68.4 348.64c0 .58-.35 1.1-.88 1.28l-8.22 2.93v-15.89l7.38-2.63c.84-.3 1.72.35 1.72 1.28zm-11.7 4.2l-8.22-2.92c-.53-.19-.88-.7-.88-1.28v-13.03c0-.93.88-1.58 1.72-1.28l7.38 2.63zm1.73-18.36c-.28.1-.58.1-.86 0l-9.1-3.32c-1.7-.62-3.47.68-3.47 2.55v15.86c0 1.16.71 2.2 1.77 2.56l10.81 3.8c.27.1.57.1.84 0l10.81-3.8a2.7 2.7 0 0 0 1.77-2.56v-15.86c0-1.87-1.77-3.17-3.46-2.55z" />
+  </defs>
+  <g
+     id="g1624"
+     transform="translate(-42,-326)">
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#005e49"
+       id="use1622"
+       xlink:href="#u7tyc" />
+  </g>
+</svg>

@@ -1,0 +1,1094 @@
+@font-face {
+    font-family: "RooneySansBlack";
+    src: url("../fonts/rooney sans black.otf") format("opentype");
+}
+@font-face {
+    font-family: "RooneySansMedium";
+    src: url("../fonts/rooney sans medium.otf") format("opentype");
+}
+@font-face {
+    font-family: "RooneySansLight";
+    src: url("../fonts/rooney sans light.otf") format("opentype");
+}
+@font-face {
+    font-family: "RooneySansBold";
+    src: url("../fonts/rooney sans bold.otf") format("opentype");
+}
+@font-face {
+    font-family: "sourcesans-semibold";
+    src: url("../fonts/source-sans-pro-semibold-3.otf") format("opentype");
+}
+@font-face {
+    font-family: "sourcesans";
+    src: url("../fonts/source-sans-pro-19.otf") format("opentype");
+}
+.logo-dashboard{width:100%;}
+.no_alcanzado{opacity: 0.7;}
+/*.btn-primary{background-color:#FFD511;border-color: #FFD511;color:#FFF;}*/
+.btn-primary{background-color:#00664f;border-color: #00664f;color:#FFF;border-radius: 2.25rem;}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary.active:hover, .btn-primary.active:focus{background-color:#005e49;}
+.form-control:focus, .single-line:focus {border-color: #FFD511 !important;}
+.profile-element img{width:100%;}
+body{background-color: #FFD511;}
+.widget{color:#005e49;min-height: 118px;}
+a .widget{background-color:#FFF;}
+a:hover .widget{background-color:#FFD511;}
+img.menu_izquierda{max-height:20px !important;max-width:20px !important;}
+.widget img{max-height: 70px;}
+.widget img.cupones_home{height: 40px;margin-top: 20px;}
+.seccion_notificaciones .prod_activo img{width:50px !important;}
+.nav > li > a {color:#005e49;}
+.nav > li.active{background-color:#FFF;border-left:#005e49;color:#005e49;}
+.nav > li.active > a{background-color:#FFF;color:#005e49;}
+.navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus{background-color:#FFF;color:#005e49;}
+.nav-header{background: #FFD511;}
+.nav-header .text-muted {color: #FFF;}
+.datos_perfil .m-b{width:100%;}
+.producto_imagen_listado{height:50px;}
+.navy-bg {background-color: #FFD511;}
+.compras_30_dias{padding:20px;}
+.widget h2{font-family: RooneySansBlack;}
+#bloque-app-dashboard .widget{
+	background-color:#FFD511;
+}
+#bloque-app-dashboard:hover .widget{
+	background-color:#EEC400;
+	color:#004d38;
+}
+#bloque-cheque-ahorro-dashboard .widget{
+	background-color:#005e49;
+    color:#FFF;
+    min-height: 220px;
+}
+.h_centro{
+    align-self: center;
+}
+/*#bloque-cheque-ahorro-dashboard:hover .widget{
+	background-color: #004d38;
+    color: #FFD511;
+}*/
+.puntos_cheque{font-size: 35px;font-weight: bold;margin-bottom:0px;}
+.dashboard-page .wrapper-content {padding: 0px 10px 0px 40px;}
+.grup_cupones .tabler h3 {
+    line-height: 0.9em;
+	font-weight: 600;
+	text-transform:uppercase;
+	color:#005e49;
+	font-family: RooneySansBlack;
+}
+.grup_cupones .tabler.multi {
+    background: #eff5f4;
+}
+.grup_cupones .tabler .cup_qty {    
+   padding-right:0; 
+   text-align: center;
+}
+.grup_cupones .tabler .cup_qty h1 {
+    font-size: 27px;
+    font-weight: bold;
+	font-family: RooneySansBlack;
+	color:#005e49;
+}
+.cabecera-ticket-multicupon {
+    background-image: url(../img/svg/tarjeta/multicupon.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+	height:65px;
+}
+.siguiente_multicupon{margin: 10px;text-transform: uppercase;}
+.siguiente_multicupon_bloque{display:none;}
+.grup_cupones .cup_name {
+    padding-left: 0.5vw;
+    padding-right: 0;
+}
+.grup_cupones p{
+	font-family:Arial;
+}
+.recorte{
+	border: 2px dashed #005e49;
+    border-radius: 10px;
+    display: block;
+    float: left;
+	margin-bottom:10px;
+	background:#FFF;
+	width:100%;
+}
+.recorte1{
+	border: 2px dashed #ececec;
+    border-radius: 10px;
+    display: block;
+    float: left;
+	margin-bottom:10px;
+	background:#FFF;
+	width:100%;
+}
+#acum {
+    background: #D9E7E4;
+    border-radius: 80px;
+    padding: 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+	color: #005E49;
+	text-align:center;
+	float:right;
+}
+#acum p{margin:0px}
+#acum p.saldo {
+    font-family: Arial;    
+}
+.titulo_seccion_multi{
+	font-size: 30px;
+    line-height: 50px;
+	padding:10px;
+}
+.fecha_seccion_multi{
+	color: #000;
+    text-align: center;
+    padding: 10px;
+}
+.pagina-ahorro h4 {
+    float: left;
+}
+.more_left {
+	font-size: 18px;
+    line-height: 3em;
+    margin: 0;
+    padding-left: calc((1vw * 7.39) - 20.45px);
+	font-weight: bold;
+	font-family: RooneySansBlack;
+	color:#005e49;
+}
+.more_right {
+    padding-right: calc((1vw * 7.39) - 20.45px);
+}
+.pagina-ahorro .compras > div {
+    border-top: 1px solid rgb(238,238,238);
+    border-bottom: 1px solid rgb(238,238,238);
+}
+.pagina-ahorro .compras p {
+    float: right;
+    font-size: 16px;
+    color: #6C6F74;
+    line-height: 3em;
+}
+.pagina-ahorro .compras p span {
+    font-size: 16px;
+}
+.pagina-ahorro .leyenda p {
+    font-size: 12px;
+    padding: 0px;
+	margin:0px;
+}
+
+.pagina-ahorro .leyenda .anyo  {
+    padding-right: 0;
+}
+.pagina-ahorro .leyenda .anyo p {
+    font-family: arial;
+	font-weight:700;
+    float: right;
+}
+.pagina-ahorro .leyenda .mes p {
+    font-family: RooneySansLight;
+	padding: 10px 0px;
+}
+.pagina-ahorro .leyenda .ahorro {
+    padding-left: 0;
+}
+.pagina-ahorro .leyenda .ahorro p {
+    font-family: arial;
+	font-weight:700;
+	padding:10px;
+}
+.pagina-ahorro .leyenda .cifra_ahorro p {
+	padding:0px;
+}
+.row.leyenda.hist_datos p {
+    padding-top: 0;
+    line-height: 2em;
+}
+.row.historico .leyenda p {
+    padding-top: 0;
+    line-height: 2em;
+}
+    
+.row.leyenda.hist_datos .anyo.gasto,
+.row.leyenda.hist_datos .ahorro.cifra_ahorro {
+    background: #d8d8d8;
+}
+.row.leyenda.hist_datos .anyo.gasto {
+    border-top-left-radius: 46px;
+    border-bottom-left-radius: 46px;
+    padding: 0;
+}
+.row.leyenda.hist_datos .anyo.gasto p {
+    float: left;
+    background: #ffca00;
+    border-radius: 59px;
+    text-align:center;
+}
+.row.leyenda.hist_datos .ahorro.cifra_ahorro {
+    border-top-right-radius: 46px;
+    border-bottom-right-radius: 46px;
+}
+.row.subtotales > div {
+    padding: 0;
+}
+h5 {
+    font-size: calc((1vw * 2.13) + 3.18px);
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+}
+.row.subtotales h5 {
+    position: absolute;
+    top: 0;
+    left: 45%;
+    color: black;
+    font-size: 14px;
+}
+.row.subtotales p {
+    position: absolute;
+    top: 30px;
+    left: 47%;
+    color: #005e49;
+    font-size: 24px;
+    font-family: arial;
+	font-weight:700;
+}
+.row.subtotales p span {
+    font-size: 14px;
+}
+.twitter-block {height:635px;overflow:auto;margin-bottom:20px;}
+.row.ahorro_total p {
+    font-size: 3.8vw;
+    font-family: RooneySansMedium;
+    color: black;
+	float:right;
+	font-size:50px;
+}
+.miembro_familia, .tarjetas_asociadas{padding: 20px;
+    background: #FFF;
+border-radius: 10px;}
+.unidad_familiar h2,.unidad_familiar_perfil h2{    
+    line-height: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #005e49;
+    font-family: RooneySansBlack;    
+    font-size: 45px;
+    padding:10px;
+    margin-bottom:20px;
+}
+/*.pagina-folletos-vista .unidad_familiar_perfil h2, .pagina-folletos-grid .unidad_familiar_perfil h2{
+    text-align: center;
+}*/
+.unidad_familiar{margin-bottom:20px;}
+.row.ahorro_total p.big_tot { 
+    font-size: 50px;
+    color: #005e49;
+    font-family: arial;
+	font-weight:700;
+}
+.row.ahorro_total p.big_tot span {
+    font-size: 30px;
+}
+.pagina-ahorro .subtotales{padding: 10px 20px;margin: 10px 20px;}
+.pagina-ahorro .ahorro_total{padding:20px 20px 0px 20px !important;margin:20px;background:#FFF;overflow:hidden;}
+.pagina-ahorro .compras{background: #fff;margin: 0px 20px;}
+.row.leyenda.hist_datos.totales {position: relative;}
+div.marcador_gasto {
+    position: absolute;
+    top: -8px;
+    left: 30%;
+    text-align: center;
+}
+div.linea_vertical_verde {
+    height: 40px;
+    width: 10px;
+    background: #005E49;
+    border-radius: 26px;
+}
+.notificaciones p {
+	position: absolute;
+    font-size: 10px;
+    background: #DD0C50;
+    color: white;
+    border-radius: 69px;
+    padding: 2px 6px;
+    font-weight: bold;
+    top: 10px;
+    right: 0px;
+}
+.notificaciones img{width:20px;}
+.navbar-default {font-size:17px;}
+.botonera-app{margin-top:15px;}
+.simbolo-separacion-ahorro{font-weight: bold;font-size: 38px;color: #000;}
+.senalizados,.otros{padding-left:20px !important;}
+.navbar-left {float: left!important;}
+.navbar-right {float: right!important;}
+.navbar-top-links li{float:left;}
+.nav-tabs > li > a.activo {
+    background-color: #e6e6e6;
+    color: #676a6c;
+}
+
+@media (min-width: 769px){
+	.navbar-header{display:none;}
+}
+@media (max-width: 768px)
+{
+	.senalizados,.otros,.sobre_compra{padding: 20px 10px;margin: 10px;}
+	.navbar-minimalize{display:block;}
+	body.mini-navbar .profile-element, body.mini-navbar .nav-label, body.mini-navbar .navbar-default .nav li a span{display:inline-block;}
+	body.mini-navbar .navbar-static-side{width:240px;background:#fff;height:100%;}
+	body.mini-navbar .nav-header{display:none;}
+}
+
+.comunicaciones{
+    line-height: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #005e49;
+    font-family: RooneySansBlack;
+    font-size: 30px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.input_comunicaciones{
+    padding: 20px;
+    background: #fff;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 700;
+}
+.js-switch_ajustes_1, .js-switch_ajustes_2{
+    display: none;
+}
+.switchery {
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    position: relative;
+    vertical-align: middle;
+    width: 50px;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    background-color: rgb(204, 204, 204);
+}
+.switchery > small {
+    background: #fff;
+    border-radius: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    height: 30px;
+    position: absolute;
+    top: 0;
+    width: 30px;
+}
+#slider-folletos-sinslider{
+    width: 400px;
+    height: 600px;
+}
+#slider-folletos-sinslider img {
+    width: 230px;
+    float: left;
+    margin-right: 10px;
+}
+
+#slider-folletos-sinslider .item {
+    width: 600px;
+    float: left;
+    padding: 10px;
+}
+#slider-folletos-sinslider h5 {
+    font-size: 30px;
+    text-align: left;
+    color: #005e49;
+    line-height: 1em;
+    font-weight: bold;
+}
+#slider-folletos-sinslider p {
+    text-align: left;
+    padding-top: 8px;
+    font-family: RooneySansMedium;
+    color: black;
+    line-height: 1em;
+}
+.folletos-botones {
+    color: #000;
+    font-size: 16px;
+    background: #d9e7e4;
+    height: 13vh;
+}
+.pagina-folletos-vista .but_container .row > div {
+    padding: 1vw;
+    margin: 0;
+    text-align: center;
+}
+.folletos-botones .folletos-nav-boton {
+    background: #005e49;
+    padding: 5px;
+    color: #FFF;
+    border-radius: 5px;
+    margin-top: 3vh;
+    cursor: pointer;
+}
+.folletos-botones img {
+    width: 13px;
+    margin: 10px 0px;
+}
+.row.listas {
+    padding-top: 0px;
+    position: relative;
+    margin-bottom: 5px;
+    width: 70%;
+}
+#lista1{
+    padding-right: 15px !important;
+    margin-bottom: 40px;
+}
+#lista1 .lista_prod {
+    position: relative;
+    background: #FFF;
+    margin-bottom: 10px;
+}
+.row.lista_prod {
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    border-bottom: 2px solid #ddd;
+}
+.row.lista_prod .prod_env {
+    font-size: 14px;
+    font-family: RooneySansLight;
+    /*margin-bottom: 1vw;*/
+}
+#lista1 .borrar_mensaje {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 46px;
+}
+.linea1 {
+    font-size: 15px;
+    margin-bottom: 10px;
+    float: left;
+    width: 100%;
+    line-height: 17px;
+    font-family: RooneySansMedium;
+    color: black;
+}
+.otros_cupones_valido {
+    line-height: 18px;
+    margin: 10px 0px 0px 0px;
+    color: #000;
+}
+.va_a_caducar {
+    -webkit-animation: color 2s infinite linear;
+    -moz-animation: color 2s infinite linear;
+    -o-animation: color 2s infinite linear;
+    animation: color 2s infinite linear;
+    -webkit-animation-name: SkrrrPaPaPum2;
+    animation-name: SkrrrPapaPum2;
+}
+@keyframes SkrrrPapaPum2 {
+    0% {color:#FF0000;}
+    50% {color:#005e49;}
+    100% {color:#FF0000;}
+ }
+ .swiper-container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+    width: 400px;
+    height: 600px;
+}
+#folleto_nav_paginas{
+    transition-duration: 0ms;
+    transform: translate3d(0px, 0px, 0px);
+}
+.swiper-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    -o-transition-property: transform;
+    transition-property: transform;
+    transition-property: transform,-webkit-transform;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.swiper-zoom-container img{
+    width: 400px;
+    height: auto;
+    -o-object-fit: contain;
+    object-fit: contain;
+}
+
+
+.col-xs-5ths {
+    width: 33%;
+    float: left;
+}
+.col-xs-5ths, .col-sm-5ths, .col-md-5ths, .col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-xs-5ths img {
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+    border: 0;
+}
+.folletos-botones img {
+    width: 13px;
+    margin: 10px 0px;
+}
+#grid_paginas img {
+    width: 154px;
+    margin: 10px 0px;
+}
+
+.row.lista_prod .prod_env {
+    font-size: 14px;
+    font-family: RooneySansLight;
+    cursor: pointer;
+}
+#mostrar_tickets{
+    cursor: pointer;
+}
+.codigos_texto_clicados h3 {
+    color: black;
+    font-size: 12px;
+    line-height: 1.3em;
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+    font-weight: 600;
+    text-align: center;
+}
+.cheque_ahorro,  .cheque_ahorro1{
+    padding: 0vh 7vw 2vh 7vw;
+    border-bottom: 1px solid white;
+}
+.bloque_centro {
+    background-color: #005E49;
+    position: relative;
+    border-radius: 2vw;
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: calc((1vw * 3.84) - 1.27px);
+    line-height: 1em;
+}
+#mbloque_centro1, #mbloque_centro {
+    background-color: #005E49;
+    position: relative;
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    line-height: 1em;
+}
+.btn_activar{
+    position: absolute;
+    width: 14vw;
+    top: 10vw;
+    right: 3vw;
+}
+#barcode_codigo_tarjeta_qr {
+    height: 180px;
+    padding-bottom: 20px;
+}
+#mcheque_ahorro .tot_cheque, #mcheque_ahorro1 .tot_cheque {
+    font-size: 20px;
+    font-family: arial;
+    font-weight: 700;
+}
+.tot_desde, .codigo_cheque_ahorro{
+    color: white;
+    font-size: calc((2vw) - 1.27px);
+    line-height: 1em;
+}
+.tabler_cupones {
+    position: relative;
+    margin-right: 0px;
+    margin-left: 0px;
+    border-bottom: 1px solid #EEE;
+    padding: 10px 0px;
+}
+.tabler.multi{
+    background: #eff5f4;
+    margin-bottom: 15px;
+    display: table;
+    width: 55vw;
+    position: relative;
+}
+#grup_cupones {
+    overflow: auto; 
+    padding-right: 20%;
+    padding-left: 20%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.cup_qty{
+    font-family: RooneySansBlack;
+    color: #005e49;
+    font-size: 13px;
+    font-weight: 100;
+}
+.central_texto{
+    text-align: center;
+}
+.numeros{
+    margin-bottom: 20px;
+}
+.chequeAhorro{
+    font-size: 40px;
+    font-weight: 900;
+}
+#mcheque_ahorro .chequeAhorro, #mcheque_ahorro1 .chequeAhorro{
+    font-size: 20px;
+    font-weight: 900;
+}
+#mcheque_ahorro .tot_desde, #mcheque_ahorro1 .tot_desde{
+    font-size: 15px;
+}
+#mcheque_ahorro .codigo_cheque_ahorro, #mcheque_ahorro1 .codigo_cheque_ahorro{
+    font-size: 15px;
+}
+#cheque_ahorro, #cheque_ahorro1{
+    padding: 0vh 20% 6vh 20%;
+    border-bottom: 1px solid white;
+}
+#mcheque_ahorro, #mcheque_ahorro1{
+    padding: 10px !important;
+    margin-right: 15px;
+    border-bottom: 1px solid white;
+}
+#myswitch{
+    position: absolute;
+    width: 50px;
+    top: 5vw;
+    right: 3vw; 
+}
+.barra_cabecera {
+    margin-left: 5px;
+}
+.resaltar_cupon{
+    -webkit-animation: background-color 2s infinite linear;
+    -moz-animation: background-color 2s infinite linear;
+    -o-animation: background-color 2s infinite linear;
+    animation: background-color 2s infinite linear;
+    -webkit-animation-name: SkrrrPaPaPum_resaltar;
+    animation-name: SkrrrPapaPum_resaltar;	  
+  }
+  @keyframes SkrrrPapaPum_resaltar {
+    0% {background-color:#FFFFFF;}
+    50% {background-color:#eeeeee;}   
+    100% {background-color:#FFFFFF;}
+ }
+  .resaltar_cupon1{
+    -webkit-animation: background-color 5s infinite linear;
+    -moz-animation: background-color 5s infinite linear;
+    -o-animation: background-color 5s infinite linear;
+    animation: background-color 5s infinite linear;
+    -webkit-animation-name: SkrrrPaPaPum_resaltar1;
+    animation-name: SkrrrPapaPum_resaltar1;	  
+  }
+  @keyframes SkrrrPapaPum_resaltar1 {
+    0% {background-color:#005E49;}
+    50% {background-color:#333;}   
+    100% {background-color:#005E49;}
+ }
+  #bloque-cheque-ahorro-dashboard h3.ahorrar2, #bloque-cheque-ahorro-dashboard h3.ahorrar {
+    padding: 7px;
+    margin-left:10%;
+    width: 40%;
+    font-weight: 1000;    
+  }
+  #bloque-cheque-ahorro-dashboard h3.ahorrar, #bloque-cheque-ahorro-dashboard h3.ahorrar2 {
+    color: #005E49;
+    background: #D9E7E4;
+    display: inline;
+    border-radius: 80px;
+    width: 80%;
+    padding: calc((1vw * 1.42) - 0.55px) calc((1vw * 2.7) - 1.64px);
+  }
+  
+  #com_ahorrar{margin-left:0%;}
+.ahorrar2_animation,.ahorrar2_animation2
+{
+    position:absolute;
+    margin-top:80px !important;
+    top: 20px;
+    left: 30%;
+    margin-left:0px !important;
+    padding:20px !important;
+}
+.ahorrar2_animation2
+{
+  -webkit-animation: opacity 10s infinite linear;
+  -moz-animation: opacity 10s infinite linear;
+  -o-animation: opacity 10s infinite linear;
+  animation: opacity 10s infinite linear;
+  -webkit-animation-name: SkrrrPaPaPumAhorrar2;
+  animation-name: SkrrrPapaPumAhorrar2;
+}
+@keyframes SkrrrPapaPumAhorrar2 {
+   0% {opacity:1;}
+   50% {opacity:1;}   
+   55% {opacity:0;}   
+   75% {opacity:0;}
+   95% {opacity:1;}
+   100% {opacity:1;}
+}
+
+#table_tickets, #table_tickets th{
+    text-align: right;
+}
+.unidad_familiar .col-md-4, .unidad_familiar .col-md-6{
+    padding-bottom: 5px;
+}
+@media (max-width: 768px){
+    #page-wrapper{
+      padding: 0px;
+    }
+    .unidad_familiar_perfil h2, .unidad_familiar h2{
+      font-size: 30px !important;
+    }
+    .pagina-folletos-vista .but_container, .pagina-folletos-grid .grid, .grup_cupones, .sin_padd_r {
+      padding-right: 15px !important;
+      padding-left: 15px !important;
+    }
+    #grid_paginas img {
+      width: 110px !important;
+      margin: 10px 0px;
+    }
+    #slider-folletos-sinslider h5{
+      font-size: 20px !important;
+    }
+    .dash_min{
+      padding: 0 !important;
+    }
+    .dash_min1{
+        padding: 0 !important;
+        padding-left: 5px !important;
+    }
+    .tab-panel .ibox-content{
+      overflow: auto;
+    }
+    .row.listas{
+      width: 100% !important;
+    }
+    .navbar-right a{
+        margin-right: 15px;
+    }
+    .pagina-ahorro .compras {
+        margin: 0px 0px;
+    }
+    .pagina-ahorro .ahorro_total{
+        margin: 0;
+    }
+    #com_ahorrar{
+        width: 60% !important;
+        left: 16% !important;
+    }
+}
+.tam_cupon_row, .tam_cupon_col{
+    flex-wrap: wrap;
+    display: flex;
+}
+.ahorro_6_meses{
+    overflow: auto;
+}
+.tarjetas_asociadas img{
+    width: 100%;
+    height: auto;
+}
+/*.responsive {
+    width: 100%;
+    height: 34px;
+}*/
+.aviso_legal_registro_nuevo{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#datos_cliente_nuevo .data{
+    margin-bottom: 10px;
+}
+.btn-danger{
+    border-radius: 1.25rem;
+}
+/*Nuevo index*/
+#zona_cliente_titulo{
+    font-size: 2rem;
+    color: #212529;
+}
+.input_home, #registroform .form-control{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 1.2rem 2.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-clip: padding-box;
+    border-color: #c1c1c1;
+    border-radius: 3.5rem;
+    height: 6rem;
+    font-size: 1.7rem;
+    width: 100%;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    color: #000;
+}
+.input_home:focus, #registroform .form-control:focus{
+    outline: unset !important;
+    border: 1px solid #00664f !important;
+}
+.u-link{
+    color: #00664f;
+    cursor: pointer;
+}
+#registroform .col-md-6,#registroform .col-md-3{
+   padding: 0; 
+}
+.padd_l{
+    padding-left: 15px !important;
+}
+
+
+#dynamicForm-form-desktop-recoveryPassword
+{
+    width: 100%;
+    flex-direction: column!important;
+    display: flex!important;
+    box-sizing: border-box;
+}
+#dynamicForm-form-desktop-recoveryPassword-title{
+    margin-top: 2.5rem;
+    justify-content: center!important;
+    flex-direction: row!important;
+    display: flex!important;
+    box-sizing: border-box;
+}
+.ng-tns-c18-68{
+    font-family: sourcesans;
+    margin: 0;
+    font-family: inherit;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #212529;
+}
+.field-html-container--neutral{
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
+}
+.dynamicForm-base .field-input-label {
+    margin-right: 1.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 1.5rem;
+    font-size: 1.6rem;
+    font-family: sourcesans-semibold;
+}
+.modal-header{
+    text-align: center;
+}
+#form-recoveryPassword-field-username-value input{
+    background-clip: padding-box;
+    border-color: #c1c1c1;
+    height: 4.75rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+    border-radius: 1rem;
+}
+#mi_modal .modal-dialog{
+    max-width: 480px; 
+}
+#mi_modal .btn-primary{
+    width: 100%;
+    height: 6rem;
+    border-radius: 3.5rem;
+    margin-top: 2rem;
+    font-family: sourcesans-semibold;
+}
+#form_pass .btn-primary, #form_tarjeta .btn-primary, #form_nuevaClave .btn-primary{
+    height: 6rem;
+    border-radius: 3.5rem;
+    font-size: 1.7rem;
+    font-family: sourcesans-semibold;
+}
+#form_pass a, #form_tarjeta a{
+    padding-top: 15px;
+}
+#html-group-end img{
+    width: 100%;
+    height: 9rem;
+    background-position-x: center;
+}
+#html-group-end h4{
+    color: #212529;
+    font-size: 2rem;
+    /* font-family: sourcesans-bold; */
+    text-align: center!important;
+    margin-top: 2.5rem!important;
+    font-weight: bold;
+    line-height: 1.2;
+}
+#html-group-end h5{
+    font-size: 1.5rem;
+    /* font-family: sourcesans; */
+    text-align: center!important;
+    margin-top: 2.5rem!important;
+    line-height: 1.4!important;
+    box-sizing: border-box;
+    color: #212529;
+}
+.btn-primary:hover{
+    border-color: #00664f !important;
+}
+button{
+    outline:none !important;
+}
+.select_idioma{
+    overflow: hidden; 
+    border: 1px solid #ccc;
+}
+.select_idioma option{
+    font-size: 16px;
+}
+.style1, .compras, .ahorro_total, .datos_perfil, .input_comunicaciones, .miembro_familia, .lista_prod  {
+    border-radius: 25px;
+}
+.dash_min1, .br_25, .folletos-botones, .folletos-nav-boton{
+    border-radius: 25px !important;
+}
+#wrapper{
+    background-color: white;
+}
+.footer, .footer a{
+    background-color: #00664f;
+    color: white;
+}
+.footer a:hover{
+    color: black;
+}
+.nav > li > a{
+    color: black;
+}
+.nav > li > a:hover{
+    color: #005e49;
+}
+.fa-home, .navbar-top-links a span:hover{
+    color: #005e49;
+}
+#wrapper{
+    font-family: sourcesans !important;
+}
+#bloque-cheque-ahorro-dashboard h3.ahorrar:hover{
+    color: #000;
+}
+.active .menu_izquierda #svg_2, .active .menu_izquierda #svg_3, .active .menu_izquierda #svg_4{
+    fill: #005e49;
+}
+.gray-bg{
+    font-family: sourcesans;
+}
+.lockscreen.middle-box{
+    width: 400px !important;
+}
+.card_width{
+    width: 40rem;
+}
+.close span {
+    font-size: 3rem;
+    color: #00664f;
+    cursor: pointer;
+    font-weight: 400;
+    opacity: 1;
+}
+.close{
+    opacity: 1;
+}
+.select_idioma{
+    border-radius: 1rem !important;
+}
+.bloque-boton-modificar-estilos button{
+    border-radius: 2.25rem;
+}
+.portada img, .hard img, .contraportada .hard img {
+    width: 100%;
+    height: 100%;
+}
+#flipbook{
+    margin: 0 auto !important;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+    width: 800px !important;
+    height: 566px !important;
+}
+#plus_ext_box{
+    margin-bottom: 20px;
+}
+.seccion_notificaciones  .lista_prod:hover{
+    -webkit-box-shadow: 1px 1px 5px #999;
+    -moz-box-shadow: 1px 1px 5px #999;
+    filter: shadow(color=#999999, direction=135, strength=2);
+}
+@media (max-width: 768px){
+    #flipbook{
+        width: 400px !important;
+        height: 400px !important;
+    }
+    .card_width{
+        width: 30rem !important;
+    }
+    .lockscreen.middle-box{
+        width: 300px !important;
+    }
+    .input_home{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 1.2rem 2.5rem;
+        font-weight: 400;
+        line-height: 1.5;
+        background-clip: padding-box;
+        border-color: #c1c1c1;
+        border-radius: 3.5rem;
+        height: 6rem;
+        font-size: 1.7rem;
+        width: 100%;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        color: #000;
+    }
+}
+.welcome-message-movil {
+    display: none; 
+}
+@media (max-width: 1000px){
+    .welcome-message-movil {
+        display: block; 
+    }
+}

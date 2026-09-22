@@ -1,0 +1,786 @@
+<?php
+if (isset($_GET['tienda'])&&$_GET['tienda']!='') $tienda = $_GET['tienda'];
+else $tienda = '';
+if (isset($_GET['hash'])&&$_GET['hash']!='') $hash = $_GET['hash'];
+else $hash = '';
+if (isset($_POST['tienda'])&&$_POST['tienda']!='') $tienda = $_POST['tienda'];
+if (isset($_POST['hash'])&&$_POST['hash']!='') $hash = $_POST['hash'];
+
+require($_SERVER['DOCUMENT_ROOT']."/dashboard/Scripts-Gestion/conexion.php");
+//Comprobamos el acceso
+if ($hash!= md5('123MASYMAS123_'.$tienda)) 
+{
+	//print md5('123MASYMAS123_'.$tienda);
+	exit;
+}
+
+if ($_SERVER['HTTP_REFERER'] == "")
+{
+	//Header ("Location: index.php?error_login=1");
+	//die ("Error cod.:1 - Acceso incorrecto!");
+	//exit;
+}
+function getRealIP() 
+{
+	if (!empty($_SERVER['HTTP_CLIENT_IP'])) return $_SERVER['HTTP_CLIENT_IP'];
+	if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) return $_SERVER['HTTP_X_FORWARDED_FOR'];
+	return $_SERVER['REMOTE_ADDR'];
+}
+if (isset($_POST)&&$_POST['DNI_CLIENTE']!='')
+{
+	if ($_POST['NOMBRE']=='') $errores.="El nombre es un campo obligatorio.<br/>";
+	if ($_POST['APELLIDOS']=='') $errores.="Los apellidos es un campo obligatorio.<br/>";
+	if ($_POST['DIRECCION']=='') $errores.="La direccion es un campo obligatorio.<br/>";
+	if ($_POST['CAJERA']>9999) $errores.="Código de cajera no puede ser mayor de cuatro dígitos.<br/>";
+	if ($_POST['MOVIL']==''&&$_POST['TELEFONO']=='') $errores.="Es obligatorio al menos un teléfono de contacto.<br/>";
+	if ($_POST['TIPO_DIRECCION']==''||$_POST['TIPO_DIRECCION']=='Seleccionar') $errores.="El tipo de dirección es un campo obligatorio.<br/>";
+	if ($_POST['SEXO']==''||$_POST['SEXO']=='Seleccionar') $errores.="El sexo es un campo obligatorio.<br/>";	
+	if ($_POST['PERS_UNIDAD_FAM']==''||$_POST['PERS_UNIDAD_FAM']=='Seleccionar') $errores.="Las personas de la unidad familiar es un campo obligatorio.<br/>";	
+	if ($errores=='')
+	{			
+		$errores_sql='';
+		if ($_POST['ID_CLIENTE']!='')
+		{			
+			$requete = "UPDATE `Clientes` SET `TIPO_DOCUMENTO`='".$_POST['tipo_documento']."',`ORIGEN`='PANEL_EMPLEADO',`CODIGO_CAJERA`='".trim($_POST['CAJERA'])."',`ALMACEN`=".$tienda.",`NOMBRE`='".addslashes(trim($_POST['NOMBRE']))."', `APELLIDOS`='".addslashes(trim($_POST['APELLIDOS']))."', `NACIONALIDAD`='".addslashes(trim($_POST['NACIONALIDAD']))."',`DIRECCION`='".addslashes(trim($_POST['DIRECCION']))."',`NUMERO`='".addslashes(trim($_POST['NUMERO']))."',`PISO_LETRA_OTROS`='".addslashes(trim($_POST['PISO_LETRA_OTROS']))."',`POBLACION`='".addslashes(trim($_POST['POBLACION']))."',`COD_POSTAL`='".addslashes(trim($_POST['COD_POSTAL']))."',`PROVINCIA`='".addslashes(trim($_POST['PROVINCIA']))."',`TELEFONO`='".addslashes(trim($_POST['TELEFONO']))."',`MOVIL`='".addslashes(trim($_POST['MOVIL']))."',`EMAIL`='".addslashes(trim($_POST['EMAIL']))."'";
+			if ($_POST['PUBLICIDAD']=='SI') $requete.=",`ENVIO_PUBLICIDAD`='S'";
+			else $requete.=",`ENVIO_PUBLICIDAD`='N'";
+			if ($_POST['TIPO_DIRECCION']!=''&&$_POST['TIPO_DIRECCION']!='Seleccionar') $requete.=", `TIPO_DIRECCION`='".$_POST['TIPO_DIRECCION']."'";
+			else $requete.=", `TIPO_DIRECCION`=NULL";
+			if ($_POST['SEXO']!=''&&$_POST['SEXO']!='Seleccionar') $requete.=", `SEXO`='".$_POST['SEXO']."'";
+			else $requete.=", `SEXO`=NULL";		
+			if ($_POST['ESTADO_CIVIL']!=''&&$_POST['ESTADO_CIVIL']!='Seleccionar') $requete.=", `ESTADO_CIVIL`='".$_POST['ESTADO_CIVIL']."'";
+			else $requete.=", `ESTADO_CIVIL`=NULL";
+			if ($_POST['PERS_UNIDAD_FAM']!=''&&$_POST['PERS_UNIDAD_FAM']!='Seleccionar') $requete.=", `PERS_UNIDAD_FAM`='".$_POST['PERS_UNIDAD_FAM']."'";
+			else $requete.=", `PERS_UNIDAD_FAM`=NULL";
+			if ($_POST['HIJOS_HOGAR']!=''&&$_POST['HIJOS_HOGAR']!='Seleccionar') $requete.=", `HIJOS_HOGAR`='".$_POST['HIJOS_HOGAR']."'";
+			else $requete.=", `HIJOS_HOGAR`=NULL";		
+			if ($_POST['FECHA_NACIMIENTO'])
+			{			
+				$tmp_fecha = explode("/",$_POST['FECHA_NACIMIENTO']);
+				$requete.=",`FECHA_NACIMIENTO`='".$tmp_fecha[2]."-".$tmp_fecha[1]."-".$tmp_fecha[0]."'";
+			}
+			$requete.=",`FECHA_MODIFICACION`='".date('Y-m-d')."'";
+			$requete.=",`FECHA_MODIFICACION_APP`='".date('Y-m-d H:i:s')."'";
+			$requete.= " WHERE `Id`=".$_POST['ID_CLIENTE'];
+			if (mysql_query($requete,$db))
+			{
+				$mensaje.= "Cliente modificado correctamente.<br/>";
+				$requete2 = "INSERT INTO `LogEmpleados` (`ID_TIENDA`,`FECHA`,`IP,`ACCION`) VALUES (".$tienda.",'".date('Y-m-d H:i:s')."','".getRealIP()."','".$requete."');";
+				mysql_query($requete2,$db);
+				if ($_POST['NUMERO_TARJETA']!='')
+				{
+					$requete2 = "SELECT * FROM `ClientesTarjetas` WHERE `CODIGO_TARJETA`=".$_POST['NUMERO_TARJETA'];
+					$result2 = mysql_query($requete2,$db);
+					if (($result2) && (mysql_num_rows($result2)>0))
+					{
+						$listado2 = mysql_fetch_object($result2);
+						$errores.= "La tarjeta ya existe en nuestros sistemas y está vinculada al DNI: ".$listado2->DNI_CLIENTE;
+					}
+					else
+					{
+						$requete2 = "INSERT INTO `ClientesTarjetas` (`CODIGO_TARJETA`,`DNI_CLIENTE`,`FECHA_ALTA`,`IdCliente`)";
+						$requete2.= " VALUES ('".$_POST['NUMERO_TARJETA']."','".trim($_POST['DNI_CLIENTE'])."','".date('Y-m-d H:i:s')."',".$_POST['ID_CLIENTE'].");";
+						if (mysql_query($requete2,$db))
+						{
+							$requete3 = "INSERT INTO `LogEmpleados` (`ID_TIENDA`,`FECHA`,`IP,`ACCION`) VALUES (".$tienda.",'".date('Y-m-d H:i:s')."','".getRealIP()."','".$requete2."');";
+							mysql_query($requete3,$db);
+							if ($_POST['ORIGEN']=='REFERENCIADO') $requete3 = "INSERT INTO `ClientesTarjetasGrupos` (`CODIGO_TARJETA`,`CODIGO_GRUPO`,`FECHA_ALTA`,`FechaUltimaModificacion`) VALUES ('".$_POST['NUMERO_TARJETA']."','1581','".date('Y-m-d')."','".date('Y-m-d')."');";
+							else $requete3 = "INSERT INTO `ClientesTarjetasGrupos` (`CODIGO_TARJETA`,`CODIGO_GRUPO`,`FECHA_ALTA`,`FechaUltimaModificacion`) VALUES ('".$_POST['NUMERO_TARJETA']."','3','".date('Y-m-d')."','".date('Y-m-d')."');";
+							mysql_query($requete3,$db);
+							$mensaje.= "Tarjeta asociada correctamente.<br/>";
+						}
+						else
+						{
+							$errores.= "Problemas actualizando la base de datos.";
+							$errores_sql.= $requete2."<br/>";
+						}
+					}
+				}			
+			}
+			else
+			{
+				$errores.= "Problemas actualizando la base de datos.";
+				$errores_sql.= $requete."<br/>";
+			}
+			if ($_POST['HIJOS_HOGAR']>0)
+			{
+				$requete = "DELETE FROM `ClientesHijos` WHERE `DNI_CLIENTE`='".trim($_POST['DNI_CLIENTE'])."'";				
+				mysql_query($requete,$db);
+				for ($i=0;$i<$_POST['HIJOS_HOGAR'];$i++)
+				{
+					$fecha_tmp = explode("/",$_POST['FECHA_NACIMIENTO'.$i]);
+					$fecha_tmp_texto = $fecha_tmp[2]."-".$fecha_tmp[1]."-".$fecha_tmp[0];					
+					$requete = "INSERT INTO `ClientesHijos` (`DNI_CLIENTE`,`FECHA_NACIMIENTO_HIJO`,`FechaModificacionSemilla`) VALUES ('".trim($_POST['DNI_CLIENTE'])."','".$fecha_tmp_texto."','".date('Y-m-d H:i:s')."');";
+					mysql_query($requete,$db);
+				}
+			}
+		}
+		else
+		{
+			$requete = "INSERT INTO `Clientes` (`DNI_CLIENTE`,`TIPO_DOCUMENTO`,`NOMBRE`,`APELLIDOS`,`NACIONALIDAD`,`DIRECCION`,`NUMERO`,`PISO_LETRA_OTROS`,`POBLACION`,`COD_POSTAL`,`PROVINCIA`,`TELEFONO`,`MOVIL`,`EMAIL`,`ENVIO_PUBLICIDAD`,`SEXO`,`ESTADO_CIVIL`,`PERS_UNIDAD_FAM`,`HIJOS_HOGAR`,`FECHA_NACIMIENTO`,`FECHA_MODIFICACION`,`FECHA_MODIFICACION_APP`,`FECHA_ALTA`,`ORIGEN`,`CODIGO_CAJERA`,`ALMACEN`) VALUES (";
+			$requete.="'".addslashes(trim($_POST['DNI_CLIENTE']))."','".$_POST['tipo_documento']."','".addslashes(trim($_POST['NOMBRE']))."','".addslashes(trim($_POST['APELLIDOS']))."','".addslashes(trim($_POST['NACIONALIDAD']))."','".addslashes(trim($_POST['DIRECCION']))."','".addslashes(trim($_POST['NUMERO']))."','".addslashes(trim($_POST['PISO_LETRA_OTROS']))."','".addslashes(trim($_POST['POBLACION']))."','".addslashes(trim($_POST['COD_POSTAL']))."','".addslashes(trim($_POST['PROVINCIA']))."','".addslashes(trim($_POST['TELEFONO']))."','".addslashes(trim($_POST['MOVIL']))."','".addslashes(trim($_POST['EMAIL']))."'";
+			if ($_POST['PUBLICIDAD']=='SI') $requete.=",'S'";
+			else $requete.=",NULL";
+			if ($_POST['SEXO']!=''&&$_POST['SEXO']!='Seleccionar') $requete.=",'".$_POST['SEXO']."'";
+			else $requete.=",NULL";		
+			if ($_POST['ESTADO_CIVIL']!=''&&$_POST['ESTADO_CIVIL']!='Seleccionar') $requete.=",'".$_POST['ESTADO_CIVIL']."'";
+			else $requete.=",NULL";
+			if ($_POST['PERS_UNIDAD_FAM']!=''&&$_POST['PERS_UNIDAD_FAM']!='Seleccionar') $requete.=",'".$_POST['PERS_UNIDAD_FAM']."'";
+			else $requete.=",NULL";
+			if ($_POST['HIJOS_HOGAR']!=''&&$_POST['HIJOS_HOGAR']!='Seleccionar') $requete.=",'".$_POST['HIJOS_HOGAR']."'";
+			else $requete.=",NULL";
+			if ($_POST['FECHA_NACIMIENTO'])
+			{			
+				$tmp_fecha = explode("/",$_POST['FECHA_NACIMIENTO']);
+				$requete.=",'".$tmp_fecha[2]."-".$tmp_fecha[1]."-".$tmp_fecha[0]."'";
+			}
+			else $requete.=",NULL";
+			$requete.=",'".date('Y-m-d')."'";
+			$requete.=",'".date('Y-m-d H:i:s')."'";
+			$requete.=",'".date('Y-m-d H:i:s')."'";
+			$requete.=",'PANEL_EMPLEADO'";
+			$requete.=",'".trim($_POST['CAJERA'])."'";
+			$requete.=",'".$tienda."'";
+			$requete.=");";			
+			if (mysql_query($requete,$db))
+			{
+				$mensaje.= "Cliente creado correctamente.<br/>";
+				$id_cliente = mysql_insert_id();
+				$requete2 = "INSERT INTO `LogEmpleados` (`ID_TIENDA`,`FECHA`,`IP,`ACCION`) VALUES (".$tienda.",'".date('Y-m-d H:i:s')."','".getRealIP()."','".$requete."');";
+				mysql_query($requete2,$db);
+				if ($_POST['NUMERO_TARJETA']!='')
+				{
+					$requete2 = "SELECT * FROM `ClientesTarjetas` WHERE `CODIGO_TARJETA`=".$_POST['NUMERO_TARJETA'];
+					$result2 = mysql_query($requete2,$db);
+					if (($result2) && (mysql_num_rows($result2)>0))
+					{
+						$listado2 = mysql_fetch_object($result2);
+						$errores.= "La tarjeta ya existe en nuestros sistemas y está vinculada al DNI: ".$listado2->DNI_CLIENTE;
+					}
+					else
+					{
+						$requete2 = "INSERT INTO `ClientesTarjetas` (`CODIGO_TARJETA`,`DNI_CLIENTE`,`FECHA_ALTA`,`IdCliente`)";
+						$requete2.= " VALUES ('".$_POST['NUMERO_TARJETA']."','".trim($_POST['DNI_CLIENTE'])."','".date('Y-m-d H:i:s')."',".$id_cliente.");";
+						if (mysql_query($requete2,$db))
+						{
+							$requete3 = "INSERT INTO `LogEmpleados` (`ID_TIENDA`,`FECHA`,`IP,`ACCION`) VALUES (".$tienda.",'".date('Y-m-d H:i:s')."','".getRealIP()."','".$requete2."');";
+							mysql_query($requete3,$db);
+							$requete3 = "INSERT INTO `ClientesTarjetasGrupos` (`CODIGO_TARJETA`,`CODIGO_GRUPO`,`FECHA_ALTA`,`FechaUltimaModificacion`) VALUES ('".$_POST['NUMERO_TARJETA']."'";
+							if ($_POST['GRUPO_TARJETA']!='') $requete3.= ",'".$_POST['GRUPO_TARJETA']."'";
+							else $requete3.= ",'3'";
+							$requete3.= ",'".date('Y-m-d')."','".date('Y-m-d')."');";
+							mysql_query($requete3,$db);
+							$mensaje.= "Tarjeta asociada correctamente.<br/>";
+						}
+						else
+						{
+							$errores.= "Problemas actualizando la base de datos.";
+							$errores_sql.= $requete2."<br/>";
+						}
+					}
+				}
+				if ($_POST['HIJOS_HOGAR']>0)
+				{
+					for ($i=0;$i<$_POST['HIJOS_HOGAR'];$i++)
+					{
+						$fecha_tmp = explode("/",$_POST['FECHA_NACIMIENTO'.$i]);
+						$requete = "INSERT INTO `ClientesHijos` (`DNI_CLIENTE`,`FECHA_NACIMIENTO_HIJO`,,`FechaModificacionSemilla`) VALUES ('".trim($_POST['DNI_CLIENTE'])."','".$fecha_tmp[2]."-".$fecha_tmp[1]."-".$tmp_fecha[0]."','".date('Y-m-d H:i:s')."');";
+						mysql_query($requete,$db);
+					}
+				}
+			}
+			else
+			{
+				$errores.= "Problemas actualizando la base de datos.";
+				$errores_sql.= $requete."<br/>";
+			}
+		}
+	}
+	if ($errores_sql!='')
+	{		
+		$msg = "ERRORES:<br/>";
+		$msg .= $errores_sql;
+		//print $msg;
+		$headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$headers .= 'MIME-Version: 1.0' . "\r\n";
+		$headers .= "From: app masymas <info@supermasymas.com>\r\n";
+		mail("victor.estrada@semillaproyectos.com", utf8_encode("Problemas app masymas"), $msg, $headers);
+	}	
+}
+$idioma = "es-es";
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cuadro de mandos masymas</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+	<!-- Sweet Alert -->
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	
+	<!-- FooTable -->
+    <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+	<!-- iChecks -->
+	<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+	<link href="css/custom.css" rel="stylesheet">
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+	<!-- Sweet alert -->
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	
+	<!-- FooTable -->
+    <script src="js/plugins/footable/footable.all.min.js"></script>
+	
+	<!-- Input Mask-->
+    <script src="js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+    <!-- iCheck -->
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+	
+	<script src="js/barcoder.js"></script>
+	
+	<script>
+	function asignar_tarjeta(parametro)
+	{
+		var validator = new Barcoder('ean13');
+		if (parseInt($('#NUMERO_TARJETA').val())>999999999999&&parseInt($('#NUMERO_TARJETA').val())<10000000000000)
+		{
+			if (validator.validate($('#NUMERO_TARJETA').val()))
+			{
+				return true;
+			}
+			else
+			{
+				if (parametro==0)
+				{
+					swal({
+						title: "Problemas encontrados!",
+						text: "EAN13 de tarjeta de cliente con formato incorrecto.",
+						html: true,
+						type: "error"
+					});
+				}
+				return false;
+			}		
+		}
+		else 
+		{
+			if (parametro==0)
+			{
+				swal({
+						title: "Problemas encontrados!",
+						text: "EAN13 de tarjeta de cliente con número de dígitos incorrecto.",
+						html: true,
+						type: "error"
+					});
+				return false;
+			}
+			else 
+			{
+				if ($('#NUMERO_TARJETA').val()!='') return false;
+				else return true;
+			}
+		}
+	}
+	function validateEmail(email) {
+		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(email);
+	}
+	function validarFormatoFecha(campo) {
+		var RegExPattern = /^\d{1,2}\/\d{1,2}\/\d{2,4}$/;
+		if ((campo.match(RegExPattern)) && (campo!='')) return true;
+		else return false;
+	}
+	function validarForm() 
+	{		
+		var texto_errores = '';
+		if (!asignar_tarjeta(1)) texto_errores += "Tarjeta con formato incorrecto.<br/>";
+		if ($('#MOVIL').val()==''&&$('#TELEFONO').val()=='') texto_errores += "Es obligatorio al menos un teléfono de contacto.<br/>";
+		if ($('#MOVIL').val()!=''&&(parseInt($('#MOVIL').val())<=99999999||parseInt($('#MOVIL').val())>999999999)) texto_errores += "El teléfono móvil no tiene un formato correcto.<br/>";
+		if ($('#TELEFONO').val()!=''&&(parseInt($('#TELEFONO').val())<=99999999||parseInt($('#TELEFONO').val())>999999999)) texto_errores += "El teléfono fijo no tiene un formato correcto.<br/>";
+		if ($('#EMAIL').val()!=''&&!validateEmail($('#EMAIL').val())) texto_errores += "El email no tiene formato correcto.<br/>";
+		if ($('#COD_POSTAL').val()!=''&&(parseInt($('#COD_POSTAL').val())<=9999||parseInt($('#COD_POSTAL').val())>99999)) texto_errores+= "El Código postal no tiene un formato correcto<br/>";
+		if ($('#FECHA_NACIMIENTO').val()!=''&&!validarFormatoFecha($('#FECHA_NACIMIENTO').val())) texto_errores+= "La fecha de nacimiento no tiene un formato correcto.<br/>";
+		if ($('#tipo_documento').val()!='Otro') if (!nif_correcto($('#DNI_CLIENTE').val())) texto_errores += "El DNI no tiene un formato correcto.<br/>";
+		if (texto_errores!='')
+		{
+			swal({
+				title: "Problemas encontrados!",
+				text: texto_errores,
+				html: true,
+				type: "error"
+			});
+			return false;
+		}
+		else return true;
+	}
+	function nif_correcto(dni)
+	{
+		var numero;
+		var letr;
+		var letra;
+		var expresion_regular_dni;
+		expresion_regular_dni = /^\d{8}[a-zA-Z]$/;
+		if(expresion_regular_dni.test (dni) == true)
+		{
+			numero = dni.substr(0,dni.length-1);
+			letr = dni.substr(dni.length-1,1);
+			numero = numero % 23;
+			letra='TRWAGMYFPDXBNJZSQVHLCKET';
+			letra=letra.substring(numero,numero+1);
+			if (letra!=letr.toUpperCase()) 
+			{				
+				return false;				
+			}
+			else
+			{
+				
+				return true;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
+	function pintar_fechas_hijos()
+	{
+		var num_hijos = $('#HIJOS_HOGAR').val();
+		var html_fechas_hijos = '';
+		for (var indice_tmp=0;indice_tmp<num_hijos;indice_tmp++)
+		{
+			var tmp_valor_fecha ='';
+			if ($('#FECHA_NACIMIENTO'+indice_tmp).val()!=undefined&&$('#FECHA_NACIMIENTO'+indice_tmp).val()!='') tmp_valor_fecha = $('#FECHA_NACIMIENTO'+indice_tmp).val();
+			html_fechas_hijos += '<div class="input-group m-b"><label for="FECHA_NACIMIENTO'+indice_tmp+'">Fecha nacimiento hijo '+(indice_tmp+1)+'</label><input value="'+tmp_valor_fecha+'" name="FECHA_NACIMIENTO'+indice_tmp+'" data-mask="99/99/9999" id="FECHA_NACIMIENTO'+indice_tmp+'" type="text" placeholder="dd/mm/aaaa" class="form-control"></div>';						
+		}
+		$('#FECHAS_HIJOS').html(html_fechas_hijos);
+	}
+	function cargar_datos_personales(dni_cliente)
+	{
+		$('#tarjetas tbody').html('');
+		$.ajax({
+			type:'GET',
+			timeout: 3000,
+			dataType: 'json',
+			url:'http://masymas-services.supermasymas.com/servicios/cargar_datos_personales.php?key_acceso=c5zwCl4e1vw5oY609T5GX4rD71UVx1Rf&dni_cliente='+dni_cliente,
+			success:function(res, textStatus, XMLHttpRequest)
+			{	
+				$('#ORIGEN').val(res.ORIGEN);
+				$('#ID_CLIENTE').val(res.ID_CLIENTE);
+				$('#NOMBRE').val(res.NOMBRE);
+				$('#APELLIDOS').val(res.APELLIDOS);			
+				$('#SEXO option[value="'+res.SEXO+'"]').prop("selected", "selected");
+				$('#ESTADO_CIVIL option[value="'+res.ESTADO_CIVIL+'"]').prop("selected", "selected");
+				$('#NACIONALIDAD').val(res.NACIONALIDAD);
+				$('#TIPO_DIRECCION option[value="'+res.TIPO_DIRECCION+'"]').prop("selected", "selected");
+				$('#DIRECCION').val(res.DIRECCION);
+				$('#NUMERO').val(res.NUMERO);
+				$('#PISO_LETRA_OTROS').val(res.PISO_LETRA_OTROS);
+				$('#POBLACION').val(res.POBLACION);
+				$('#COD_POSTAL').val(res.COD_POSTAL);
+				$('#PROVINCIA').val(res.PROVINCIA);
+				$('#TELEFONO').val(res.TELEFONO);
+				$('#CAJERA').val(res.CODIGO_CAJERA);
+				if (res.ENVIO_PUBLICIDAD=='S') 
+				{
+					$("#PUBLICIDAD_SI").iCheck('check');					
+					$("#PUBLICIDAD_NO").iCheck('uncheck');
+				}
+				else 
+				{
+					$("#PUBLICIDAD_NO").iCheck('check');
+					$("#PUBLICIDAD_SI").iCheck('uncheck');
+				}
+				$('#FECHA_NACIMIENTO').val(res.FECHA_NACIMIENTO);
+				$('#PERS_UNIDAD_FAM option[value="'+res.PERS_UNIDAD_FAM+'"]').prop("selected", "selected");
+				$('#HIJOS_HOGAR option[value="'+res.HIJOS_HOGAR+'"]').prop("selected", "selected");
+				if (res.HIJOS_HOGAR>0)
+				{					
+					var html_fechas_hijos ='';
+					for (var indice_tmp=0;indice_tmp<res.HIJOS_HOGAR;indice_tmp++)
+					{						
+						var objeto_nacimiento = null;												
+						if (res.FECHAS_NAC_HIJOS!=undefined) 
+						{
+							if (res.FECHAS_NAC_HIJOS.length>indice_tmp) objeto_nacimiento = res.FECHAS_NAC_HIJOS[indice_tmp];
+						}						
+						if (objeto_nacimiento!=null) html_fechas_hijos += '<div class="input-group m-b"><label for="FECHA_NACIMIENTO'+indice_tmp+'">Fecha nacimiento hijo '+(indice_tmp+1)+'</label><input value="'+objeto_nacimiento.FECHA_NACIMIENTO+'" name="FECHA_NACIMIENTO'+indice_tmp+'" data-mask="99/99/9999" id="FECHA_NACIMIENTO'+indice_tmp+'" type="text" placeholder="dd/mm/aaaa" class="form-control"></div>';
+						else html_fechas_hijos += '<div class="input-group m-b"><label for="FECHA_NACIMIENTO'+indice_tmp+'">Fecha nacimiento hijo '+(indice_tmp+1)+'</label><input value="" name="FECHA_NACIMIENTO'+indice_tmp+'" data-mask="99/99/9999" id="FECHA_NACIMIENTO'+indice_tmp+'" type="text" placeholder="dd/mm/aaaa" class="form-control"></div>';						
+					}
+					$('#FECHAS_HIJOS').html(html_fechas_hijos);					
+				}
+				$('#MOVIL').val(res.MOVIL);
+				$('#EMAIL').val(res.EMAIL);
+				var indice = 0;
+				var html_tmp = '';	
+				console.log[res.TARJETAS];				
+				while (res.TARJETAS[indice])
+				{
+					var campo = res.TARJETAS[indice];
+					var fecha_txt ='';					
+					var fecha_alta_tarjeta ='';
+					if (campo['FECHA_ALTA_TARJETA']!=null) fecha_alta_tarjeta = campo['FECHA_ALTA_TARJETA']
+					//var fecha_alta_tarjeta = campo['FECHA_ALTA_TARJETA'];
+					//var tmp_array = [];
+					//if (fecha_alta_tarjeta!=null)
+					//{
+						//tmp_array = fecha_alta_tarjeta.split('-');
+						//if (tmp_array.length()>0) fecha_txt = tmp_array[2]+'/'+tmp_array[1]+'/'+tmp_array[0];
+					//}
+					//var fecha_txt ='';
+					html_tmp += '<tr><td>'+campo['CODIGO_TARJETA']+'</td><td>'+campo['BAJA']+'</td><td>'+fecha_alta_tarjeta+'</td></tr>';
+					indice++;
+				}		
+				$('#tarjetas tbody').html(html_tmp);
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) 
+			{
+				swal({
+					title: "Problemas encontrados!",
+					text: "Problema con la conexión, reinténtalo por favor.",
+					html: true,
+					type: "error"
+				});
+			}
+		});	
+	}
+	function tarjeta_cargado()
+	{
+		$.ajax({
+			type:'GET',
+			timeout: 3000,
+			dataType: 'json',
+			url:'http://masymas-services.supermasymas.com/servicios/cargar_dni_tarjeta.php?key_acceso=c5zwCl4e1vw5oY609T5GX4rD71UVx1Rf&cod_cliente='+$('#buscar_por_tarjeta').val(),
+			success:function(res, textStatus, XMLHttpRequest)
+			{	
+				$('#DNI_CLIENTE').val(res.DNI);
+				cargar_datos_personales(res.DNI);
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) 
+			{
+				swal({
+					title: "Problemas encontrados!",
+					text: "Problema con la conexión, reinténtalo por favor.",
+					html: true,
+					type: "error"
+				});
+			}
+		});
+	}
+	function dni_cargado()
+	{
+		var correcto = true;
+		if ($('#tipo_documento').val()!='Otro')
+		{
+			correcto = nif_correcto($('#DNI_CLIENTE').val());
+			if (correcto){}
+			else 
+			{
+				swal({
+					title: "Problemas encontrados!",
+					text: "DNI con formato incorrecto.",
+					html: true,
+					type: "error"
+				});
+			}			
+		}
+		if (correcto)
+		{
+			cargar_datos_personales($('#DNI_CLIENTE').val());
+		}
+	}
+	function restablecer()
+	{
+		$('#FECHAS_HIJOS').html('');
+	}
+	</script>
+</head>
+
+<body class="no-skin-config">
+    <div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                            <img alt="image" src="/Plantillas/Imagenes/logo.svg" />
+                             </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear">
+                             <span class="text-muted text-xs block">Área privada <b class="caret"></b></span> </span> </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="?desconectar=si">Desconectar</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        +
+                    </div>
+                </li>
+				<?php
+					$seccion = "clientes";
+					require($_SERVER['DOCUMENT_ROOT']."/dashboard/herramientas/menu-tiendas.php");
+				?>
+            </ul>
+
+        </div>
+    </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        </div>
+		<?php
+		require($_SERVER['DOCUMENT_ROOT']."/dashboard/herramientas/menu-top.php");		
+		?>
+
+        </nav>
+        </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="widget style1 navy-bg">
+							<div class="row">
+								<div class="col-xs-4">
+									<i class="fa fa-shopping-cart fa-5x"></i>
+								</div>
+								<div class="col-xs-8 text-right">									
+										<?php
+											print '<span>Tienda número</span>';
+											print '<h2 class="font-bold">';
+											print $tienda;
+											print '</h2>';
+										?>									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            	<div class="row">
+					<form class="" onsubmit="return validarForm();" action="#" method="post" name="signForm" id="registroform" enctype="multipart/form-data">
+					<input type="hidden" name="tienda" value="<?php print $tienda;?>"/>
+					<input type="hidden" name="hash" value="<?php print $hash;?>"/>
+					<fieldset>
+						<div class="col-md-12">
+						<div class="ibox">
+						<div class="ibox-content datos_perfil">
+							<div class="input-group m-b">
+							<div class="col-md-2"><label for="CAJERA">CAJERA</label><input tabindex="1" value="" name="CAJERA" id="CAJERA" type="number" placeholder="CAJERA" class="form-control"></div>
+							<div class="col-md-3"><label for="BUSCAR_POR_TARJETA">BUSCAR POR TARJETA</label><input id="buscar_por_tarjeta" tabindex="2" onblur="tarjeta_cargado();" value="" name="BUSCAR_POR_TARJETA" type="number" placeholder="NÚMERO TARJETA" class="form-control"></div>							
+							<div class="col-md-3"><label for="DNI_CLIENTE">DNI</label><input required tabindex="3" onblur="dni_cargado();" value="" name="DNI_CLIENTE" id="DNI_CLIENTE" type="text" placeholder="DNI del cliente" class="form-control"></div>							
+							<div class="col-md-2"><label for="tipo_documento">TIPO DOCUMENTO</label><select tabindex="4" name="tipo_documento" id="tipo_documento" class="form-control"><option value="NIF" selected>NIF</option><option value="Otro">Otro</option></select></div>
+							<?php
+							//<div class="col-md-2"><label for="tipo_documento">TIPO DOCUMENTO</label><select tabindex="4" name="tipo_documento" id="tipo_documento" class="form-control"><option value="NIF" selected>NIF</option></select></div>							
+							?>
+							
+							<div class="col-md-2"><label for="reset">LIMPIAR</label><input name="reset" onclick="restablecer();" type="reset" class="form-control btn btn-primary"></input></div>
+							</div>
+						</div>						
+						</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<div class="col-md-6">
+						<div class="ibox">
+						<div class="ibox-content datos_perfil">	
+							<input type="hidden" name="ID_CLIENTE" id="ID_CLIENTE" value=""/>
+							<input type="hidden" name="ORIGEN" id="ORIGEN" value=""/>							
+								<div class="input-group m-b"><label for="NOMBRE">Nombre</label><input tabindex="5" value="" required name="NOMBRE" id="NOMBRE" type="text" placeholder="Nombre" class="form-control"></div>
+								<div class="input-group m-b"><label for="APELLIDOS">Apellidos</label><input tabindex="6" required  value="" name="APELLIDOS" id="APELLIDOS" type="text" placeholder="Apellidos" class="form-control"></div>
+								<div class="input-group m-b"><label for="SEXO">Sexo</label><select tabindex="7" required  name="SEXO" id="SEXO" class="form-control"><option>Seleccionar</option><option value="M">Mujer</option><option value="V">Hombre</option></select></div>
+								<div class="input-group m-b"><label for="ESTADO_CIVIL">Estado civil</label><select tabindex="8" name="ESTADO_CIVIL" id="ESTADO_CIVIL" class="form-control"><option>Seleccionar</option><option value="C">Casado/a</option><option value="S">Soltero/a</option><option value="D">Divorciado/a</option><option value="V">Viudo/a</option></select></div>
+								<div class="input-group m-b"><label for="FECHA_NACIMIENTO">Fecha nacimiento</label>
+								<input tabindex="9" value="" name="FECHA_NACIMIENTO" data-mask="99/99/9999" id="FECHA_NACIMIENTO" type="text" placeholder="dd/mm/aaaa" class="form-control"></div>								
+								<div class="input-group m-b"><label for="PERS_UNIDAD_FAM">Personas unidad familiar</label><select tabindex="10" required  name="PERS_UNIDAD_FAM" id="PERS_UNIDAD_FAM" class="form-control"><option>Seleccionar</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></div>
+								<div class="input-group m-b"><label for="HIJOS_HOGAR">Hijos en el hogar</label><select tabindex="11" required onchange="pintar_fechas_hijos();" name="HIJOS_HOGAR" id="HIJOS_HOGAR" class="form-control"><option>Seleccionar</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></div>
+								<div id="FECHAS_HIJOS"></div>
+								<div class="input-group m-b"><label for="PUBLICIDAD">¿Desea recibir publicidad y folletos en su domicilio?</label>
+								<div class="i-checks"><label><input id="PUBLICIDAD_SI" tabindex="12" type="radio" value="SI" checked name="PUBLICIDAD"> <i></i> SI </label></div>
+								<div class="i-checks"><label><input id="PUBLICIDAD_NO" tabindex="13" type="radio" value="NO" name="PUBLICIDAD"> <i></i> NO </label></div>
+								</div>
+						</div>
+						</div>
+						</div>
+						<div class="col-md-6">
+						<div class="ibox">
+						<div class="ibox-content datos_perfil">						
+								<div class="input-group m-b"><label for="NACIONALIDAD">Nacionalidad</label><input tabindex="14" value="" name="NACIONALIDAD" id="NACIONALIDAD" type="text" placeholder="Nacionalidad" class="form-control"></div>
+								<div class="input-group m-b"><label for="TIPO_DIRECCION">Tipo calle</label><select tabindex="15" required name="TIPO_DIRECCION" id="TIPO_DIRECCION" class="form-control">
+									<option value="ALDEA">ALDEA</option><option value="ARRBL">ARRABAL</option><option value="AUT">AUTOPISTA o AUTOVIA</option><option value="AVDA">AVENIDA o AVINGUDA</option><option value="BARRI">BARRI</option><option value="BDA">BARRIADA</option><option value="BJDA">BAJADA, ILLA</option><option value="BLQ">BLOQUE</option><option value="BO">BARRIO</option>
+									<option value="BRNCO">BARRANCO</option><option value="BXDA">BAIXADA</option><option value="CALLE" selected>CALLE o CARRER</option><option value="CAMI">CAMI</option><option value="CAS">CASA, CASETA</option><option value="CC">CENTRO COMERCIAL</option><option value="CJA">CALLEJA, UELA</option><option value="CJON">CALLEJON</option><option value="CJTO">CONJUNTO</option>
+									<option value="CLLZO">CALLIZO</option><option value="CMNO">CAMINO</option><option value="CMÑO">CAMIÑO</option><option value="CNIA">COLONIA</option><option value="CRA">CARRETERA, CARRERA o CORREDERA</option><option value="CRO">CARRERO</option><option value="CRRIL">CARRIL</option><option value="CSRIO">CASERIO</option><option value="CSTA">CUESTA</option>
+									<option value="CTJO">CORTIJADA o CORTIJO</option><option value="CXON">CALLEXON</option><option value="EDIF">EDIFICIO</option><option value="ESTDA">ESTRADA</option><option value="EXTR">DESPOBLADO o DISEMINADO</option><option value="EXTR">EXTRAMUROS o EXTRARRADIO</option><option value="FINCA">FINCA</option><option value="GLTA">GLORIETA</option><option value="GRUP">GRUP</option>
+									<option value="GRUPO">GRUPO</option><option value="KALE">KALE</option><option value="LLOC">LLOC</option><option value="LUGAR">LUGAR</option><option value="MASIA">MASIA</option><option value="MASO">MANSO</option><option value="PAGO">PAGO</option><option value="PARC">PARC</option><option value="PASEO">PASEO</option><option value="PBDO">POBLADO</option>
+									<option value="PCTA">PLACETA</option><option value="PJDA">PUJADA</option><option value="PJE">PASAJE</option><option value="PLAÇA">PLAÇA</option><option value="PLAZA">PLAZA</option><option value="POLIG">POLIGONO</option><option value="PQUE">PARQUE</option><option value="PRAZA">PRAZA</option><option value="PRJE">PARAJE</option><option value="PROL">PROLONGACION</option>
+									<option value="PSAXE">PASAXE</option><option value="PSEIG">PASSEIG</option><option value="PTDA">PARTIDA</option><option value="PTGE">PARATGE</option><option value="PTGE">PASSATGE</option><option value="PZLA">PLAZUELA</option><option value="PZTA">PLAZOLETA</option><option value="RAVAL">RAVAL</option><option value="RBLA">RAMBLA</option><option value="RESID">RESIDENCIAL</option>
+									<option value="RIERA">RIERA</option><option value="RONDA">RONDA</option><option value="RUA">RUA</option><option value="RUELA">RUELA</option><option value="SBIDA">SUBIDA</option><option value="SENDA">SENDA</option><option value="TRANS">TRANSVERSAL</option><option value="TRAV">TRAVESA, TRAVESIA, TRAVESSERA o TRAVESSIA</option><option value="TSRA">TRASERA</option>
+									<option value="URB">URBANIZACION</option><option value="VENAT">VEINAT</option><option value="VIA">VIA</option><option value="VREDA">VEREDA</option><option value="ZONA">ZONA</option>
+									</select>
+								</div>
+								<div class="input-group m-b"><label for="DIRECCION">Dirección</label><input tabindex="16" required value="" name="DIRECCION" id="DIRECCION" type="text" placeholder="Dirección" class="form-control"></div>
+								<div class="input-group m-b"><label for="NUMERO">Número</label><input tabindex="17" required value="" name="NUMERO" id="NUMERO" type="text" placeholder="Número" class="form-control"></div>
+								<div class="input-group m-b"><label for="PISO_LETRA_OTROS">Piso, letra y otros</label><input tabindex="18" required value="" name="PISO_LETRA_OTROS" id="PISO_LETRA_OTROS" type="text" placeholder="Piso, letra y otros" class="form-control"></div>
+								<div class="input-group m-b"><label for="POBLACION">Población</label><input tabindex="19" required value="" name="POBLACION" id="POBLACION" type="text" placeholder="Población" class="form-control"></div>
+								<div class="input-group m-b"><label for="COD_POSTAL">Código postal</label><input tabindex="20" required value="" name="COD_POSTAL" id="COD_POSTAL" type="number" placeholder="Código postal" class="form-control"></div>
+								<div class="input-group m-b"><label for="PROVINCIA">Provincia</label><input tabindex="21" required value="" name="PROVINCIA" id="PROVINCIA" type="text" placeholder="Provincia" class="form-control"></div>
+								<div class="input-group m-b"><label for="TELEFONO">Teléfono fijo</label><input tabindex="22" value="" name="TELEFONO" id="TELEFONO" type="number" placeholder="Teléfono" class="form-control"></div>
+								<div class="input-group m-b"><label for="MOVIL">Móvil</label><input tabindex="23" value="" name="MOVIL" id="MOVIL" type="number" placeholder="Móvil" class="form-control"></div>
+								<div class="input-group m-b"><label for="EMAIL">Email</label><input tabindex="24" value="" name="EMAIL" id="EMAIL" type="email" placeholder="Email" class="form-control"></div>
+						</div>
+						</div>
+						</div>						
+					</fieldset>
+					<fieldset>
+						<div class="col-md-6">
+						<div class="ibox">
+						<div class="ibox-title">
+							<h5>Asociar nueva tarjeta</h5>
+						</div>
+						<div class="ibox-content datos_perfil">	
+							<?php
+								if ($_GET['tienda']=='000')
+								{
+									print '<div class="col-md-8"><div class="input-group m-b"><label for="NUMERO_TARJETA">Número de tarjeta</label><input tabindex="25" value="" name="NUMERO_TARJETA" id="NUMERO_TARJETA" type="number" placeholder="Número de tarjeta" class="form-control"></div></div>';
+									print '<div class="col-md-4"><div class="input-group m-b"><label for="GRUPO_TARJETA">Grupo</label><input tabindex="26" value="" name="GRUPO_TARJETA" id="GRUPO_TARJETA" type="number" placeholder="Grupo" class="form-control"></div></div>';
+									print '<button class="btn btn-primary type="submit">Asignar tarjeta</button>';
+								}
+								else
+								{
+									print '<div class="input-group m-b"><label for="NUMERO_TARJETA">Número de tarjeta</label><input onblur="asignar_tarjeta(0);" tabindex="25" value="" name="NUMERO_TARJETA" id="NUMERO_TARJETA" type="number" placeholder="Número de tarjeta" class="form-control"></div>';
+									print '<button class="btn btn-primary type="submit">Asignar tarjeta</button>';
+								}
+							?>
+						</div>
+						</div>
+						</div>
+						<div class="col-md-6">
+						<div class="ibox">
+						<div class="ibox-title">
+							<h5>Tarjetas asociadas</h5>
+						</div>
+						<div class="ibox-content datos_perfil">	
+							<table id="tarjetas" class="table table-hover"><thead><tr><th>Número de tarjeta</th><th>Baja</th><th>Fecha Alta</th></tr></thead><tbody>
+							</tbody>
+							</table>
+						</div>
+						</div>
+						</div>
+					</fieldset>						
+					<fieldset>						
+						<div class="col-md-12">
+						<div class="ibox">
+						<div class="ibox-content">			
+							<div class="caja-boton bloque-boton-modificar-estilos">				
+								<button tabindex="26" class="btn btn-primary" type="submit">Guardar cambios</button>
+							</div>
+						</div>
+						</div>
+						</div>		
+					</fieldset>						
+					</form>
+				</div>
+			</div>
+        <div class="footer">
+            <div class="pull-right">
+                <strong>masymas</strong>
+            </div>
+            <div>
+                <strong>Copyright</strong> <a href="http://www.semillaproyectos.com">Semilla Proyectos Internet &copy;</a>
+            </div>
+        </div>
+        </div>
+
+    </div>
+	
+    <script>
+	$(document).ready(function() {
+		<?php
+		if ($mensaje!="")
+		{
+			echo '
+					swal({
+						title: "Operación realizada con éxito",
+						text: "'.$mensaje.'",
+						html: true,
+						type: "success"
+					});	';
+		}
+		if ($errores!="")
+		{
+			echo '
+					swal({
+						title: "Problemas encontrados!",
+						text: "'.$errores.'",
+						html: true,
+						type: "error"
+					});	';
+		}
+		?>
+		$('.footable').footable();
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+		$('#buscar_por_tarjeta').on('keydown', function(e) 
+		{
+			var self = $(this)
+			  , form = self.parents('form:eq(0)')
+			  , focusable
+			  , next
+			  ;
+			if (e.keyCode == 13) 
+			{	
+				tarjeta_cargado();
+				return false;
+			}
+		});
+		$('#DNI_CLIENTE').on('keydown', function(e) 
+		{
+			var self = $(this)
+			  , form = self.parents('form:eq(0)')
+			  , focusable
+			  , next
+			  ;
+			if (e.keyCode == 13) 
+			{	
+				dni_cargado();
+				return false;
+			}
+		});
+	});
+    </script>	
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29717040-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
+<?php
+require($_SERVER['DOCUMENT_ROOT']."/dashboard/Scripts-Gestion/cierre.php");
+?>

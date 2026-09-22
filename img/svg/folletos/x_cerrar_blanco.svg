@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="33"
+   height="33"
+   viewBox="0 0 33 33"
+   version="1.1"
+   id="svg34"
+   sodipodi:docname="x_cerrar_blanco.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <metadata
+     id="metadata38">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview36"
+     showgrid="false"
+     inkscape:zoom="16.242424"
+     inkscape:cx="13.852612"
+     inkscape:cy="16.5"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg34" />
+  <defs
+     id="defs26">
+    <path
+       id="d8q6a"
+       d="M190.29 400.2l-3.16 3.15-3.16-3.16a1.26 1.26 0 1 0-1.78 1.78l3.16 3.16-3.16 3.16a1.26 1.26 0 1 0 1.78 1.78l3.16-3.16 3.16 3.16a1.25 1.25 0 0 0 1.78 0c.49-.5.49-1.29 0-1.78l-3.16-3.16 3.16-3.16a1.26 1.26 0 1 0-1.78-1.78zm-3.16 18.55c-7.5 0-13.62-6.11-13.62-13.62 0-7.5 6.11-13.62 13.62-13.62 7.5 0 13.62 6.11 13.62 13.62 0 7.5-6.11 13.62-13.62 13.62zM171 405.13c0 8.9 7.24 16.13 16.13 16.13 8.9 0 16.13-7.24 16.13-16.13 0-8.9-7.24-16.13-16.13-16.13-8.9 0-16.13 7.24-16.13 16.13z" />
+  </defs>
+  <use
+     xlink:href="#d8q6a"
+     id="use28"
+     style="fill:#ffffff;fill-opacity:1"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     transform="translate(-171,-389)" />
+</svg>

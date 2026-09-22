@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="31"
+   height="28"
+   viewBox="0 0 31 28"
+   version="1.1"
+   id="svg1784"
+   sodipodi:docname="m_tarjeta.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <metadata
+     id="metadata1788">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview1786"
+     showgrid="false"
+     inkscape:zoom="8.4285714"
+     inkscape:cx="15.5"
+     inkscape:cy="14"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1784" />
+  <defs
+     id="defs1752">
+    <path
+       id="wgrea"
+       d="M73.97 137.7v15.54c0 .96-.76 1.71-1.71 1.71H47.7a1.7 1.7 0 0 1-1.71-1.7V137.7c0-.96.75-1.71 1.7-1.71h24.52c.96 0 1.71.75 1.75 1.7zm-.69 15.51v-15.5a1 1 0 0 0-1.02-1.03H47.7a1 1 0 0 0-1.03 1.03v15.5a1 1 0 0 0 1.03 1.02h24.51a1 1 0 0 0 1.03-1.02z" />
+    <path
+       id="wgreb"
+       d="M60.68 144.19v-.68h3.96v.68z" />
+    <path
+       id="wgrec"
+       d="M60.68 147.95v-.68h8.74v.68z" />
+    <path
+       id="wgred"
+       d="M57.61 145.56a3.75 3.75 0 0 1-3.75 3.75 3.75 3.75 0 0 1-3.76-3.75 3.75 3.75 0 0 1 3.76-3.76 3.77 3.77 0 0 1 3.75 3.76zm-.68 0c0-1.71-1.37-3.08-3.07-3.08a3.06 3.06 0 0 0-3.08 3.08 3.08 3.08 0 0 0 6.15 0z" />
+    <path
+       id="wgree"
+       d="M67 139.5a11.5 11.5 0 1 0-23 0 11.5 11.5 0 0 0 23 0z" />
+  </defs>
+  <g
+     id="g1758"
+     transform="translate(-44,-128)">
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#005e49"
+       id="use1754"
+       xlink:href="#wgrea" />
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#ffffff;fill-opacity:0;stroke:#005e49;stroke-width:2;stroke-miterlimit:50"
+       id="use1756"
+       xlink:href="#wgrea"
+       stroke-miterlimit="50" />
+  </g>
+  <g
+     id="g1764"
+     transform="translate(-44,-128)">
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#005e49"
+       id="use1760"
+       xlink:href="#wgreb" />
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#ffffff;fill-opacity:0;stroke:#005e49;stroke-width:2;stroke-miterlimit:50"
+       id="use1762"
+       xlink:href="#wgreb"
+       stroke-miterlimit="50" />
+  </g>
+  <g
+     id="g1770"
+     transform="translate(-44,-128)">
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#005e49"
+       id="use1766"
+       xlink:href="#wgrec" />
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#ffffff;fill-opacity:0;stroke:#005e49;stroke-width:2;stroke-miterlimit:50"
+       id="use1768"
+       xlink:href="#wgrec"
+       stroke-miterlimit="50" />
+  </g>
+  <g
+     id="g1776"
+     transform="translate(-44,-128)">
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#005e49"
+       id="use1772"
+       xlink:href="#wgred" />
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#ffffff;fill-opacity:0;stroke:#005e49;stroke-width:2;stroke-miterlimit:50"
+       id="use1774"
+       xlink:href="#wgred"
+       stroke-miterlimit="50" />
+  </g>
+</svg>

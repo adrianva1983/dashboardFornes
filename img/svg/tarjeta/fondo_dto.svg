@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="71"
+   height="67"
+   viewBox="0 0 71 67"
+   version="1.1"
+   id="svg869"
+   sodipodi:docname="fondo_dto.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <metadata
+     id="metadata873">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview871"
+     showgrid="false"
+     inkscape:zoom="8"
+     inkscape:cx="35.5"
+     inkscape:cy="33.5"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg869" />
+  <defs
+     id="defs849">
+    <path
+       id="t5t1a"
+       d="M62 742c0-12.7 10.52-23 23.5-23s23.5 10.3 23.5 23-10.52 23-23.5 23S62 754.7 62 742z" />
+    <path
+       id="t5t1b"
+       d="M38 763c0-12.7 10.52-23 23.5-23S85 750.3 85 763s-10.52 23-23.5 23S38 775.7 38 763z" />
+    <path
+       id="t5t1c"
+       d="M91.24 735.09c1.75 0 3.18 1.4 3.18 3.15l.01 4.74v4.74a4.76 4.76 0 0 0-4.76 4.75 4.75 4.75 0 0 0 4.78 4.73v3.16l.01 4.74v1.58a3.17 3.17 0 0 1-3.17 3.17l-31.01.04h-1.59l-11.92.02a3.17 3.17 0 0 1-3.19-3.16v-6.32l-.01-3.15a4.76 4.76 0 0 0 4.76-4.75 4.76 4.76 0 0 0-4.77-4.73l-.01-3.16v-3.16l-.01-3.16a3.17 3.17 0 0 1 3.18-3.17l11.92-.01h1.6zm.01 10.15v-5.41c0-.87-.72-1.53-1.6-1.53h-31.8l-9.54.01c-.88 0-1.6.7-1.59 1.58l.01 5.4a7.9 7.9 0 0 1 4.78 7.24 7.89 7.89 0 0 1-4.76 7.23v5.41c0 .87.72 1.58 1.6 1.58l9.54-.02h31.78c.88 0 1.61-.75 1.61-1.62v-5.4a7.89 7.89 0 0 1-.02-14.47z" />
+    <path
+       id="t5t1d"
+       d="M82 745v17h-3v-17zm-4 0v17h-2v-17zm-4 0v17h-3v-17zm-4 0v17h-2v-17zm-3 0v17h-2v-17zm-4 0v17h-3v-17zm-4 0v17h-2v-17z" />
+  </defs>
+  <g
+     style="opacity:0.17000002"
+     id="g853"
+     transform="translate(-62,-719)">
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#005e49"
+       id="use851"
+       xlink:href="#t5t1a" />
+  </g>
+  <g
+     style="opacity:0.12999998"
+     id="g857"
+     transform="translate(-14,-719)">
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       x="0"
+       style="fill:#ffca00"
+       id="use855"
+       xlink:href="#t5t1b" />
+  </g>
+</svg>
