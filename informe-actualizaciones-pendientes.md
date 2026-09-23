@@ -17,8 +17,8 @@
 |---|----------|------------------------|--------|----------|------|
 | 0 | Total de "Mi ChequeAhorro" mal calculado | `ahorro.php` | ✅ **Ya corregido** (esta sesión) | — | Bug |
 | 1 | Texto "sin notificaciones" no traducido | `js/app.js`, `lang/*.js` | ✅ **Ya corregido** (esta sesión) | — | Bug menor / i18n |
-| 2 | Badge de notificaciones no se oculta con `vistas=1` | `js/app.js`, `herramientas/menu.php` | Pendiente — **requiere decisión tuya** | Bajo | Comportamiento a confirmar |
-| 3 | Cupones / Multicupón / Vales sin el rediseño de la app | `tarjetas.php`, `megacupones.php`, `js/app.js` | Pendiente | Alto | Producto / diseño |
+| 2 | Badge de notificaciones no se oculta con `vistas=1` | `js/app.js`, `herramientas/menu.php` | ⏸️ **En espera** — se deja como está por decisión del propietario (2026-09-23) | Bajo | Comportamiento a confirmar |
+| 3 | Cupones / Multicupón / Vales sin el rediseño de la app | `tarjetas.php`, `megacupones.php`, `js/app.js`, `css/custom.css` | ✅ **Parcialmente corregido** (esta sesión) — solo `obtener_vales`, sin carrusel | Medio (de lo acordado) | Producto / diseño |
 | 4 | QR de la tarjeta con librería antigua | `tarjetas.php`, `js/app.js`, `js/qrcode.js` | Pendiente — sin evidencia de fallo | Medio | Técnico, sin urgencia |
 | 5 | Falta "Eliminar cuenta" y "Cambiar email" | `perfil.php` | Pendiente | Alto | Producto / posible tema legal (RGPD) |
 
@@ -76,7 +76,9 @@ Es un cambio pequeño, sin ambigüedad de comportamiento — puedo aplicarlo dir
 
 ---
 
-## 2. El badge de notificaciones no se oculta cuando `vistas=1`
+## 2. [En espera] El badge de notificaciones no se oculta cuando `vistas=1`
+
+> **Decisión (2026-09-23):** se deja el comportamiento actual del dashboard sin cambios por ahora. El badge sigue mostrando el número real de no leídos aunque se llame con `vistas=1`. No se ha tocado código.
 
 **Dónde:** `js/app.js`, función `obtener_mensajes`; se invoca desde `herramientas/menu.php:154`.
 
@@ -105,20 +107,58 @@ En el dashboard, esa lógica no existe: con los mismos parámetros (`vistas=1`) 
 
 ---
 
-## 3. Cupones / Multicupón / "Mis vales" — rediseño no portado
+## 3. [Parcialmente corregido] Cupones / Multicupón / "Mis vales" — rediseño no portado
 
 **Dónde:**
-- `obtener_multicupon` — dashboard: `js/app.js:1921-2120` (200 líneas) / app: `js/app.js:2105-2497` (393 líneas). Se usa desde `tarjetas.php`.
-- `obtener_vales` — dashboard: `js/app.js:2397-2640` (244 líneas) / app: `js/app.js:2946-3245` (300 líneas). Se usa desde `tarjetas.php` y `megacupones.php`.
+- `obtener_multicupon` — dashboard: `js/app.js:1921-2120` (200 líneas) / app: `js/app.js:2105-2497` (393 líneas). Se usa desde `tarjetas.php`. **No tocada.**
+- `obtener_vales` — dashboard: `js/app.js:2397-2640` (244 líneas antes del cambio) / app: `js/app.js:2946-3245` (300 líneas). Se usa desde `tarjetas.php` y `megacupones.php`. **Modificada.**
 
 Estas dos funciones son, con diferencia, las que más han divergido. No se trata de un bug puntual sino de una reestructuración de UI completa que la app ha ido incorporando y el dashboard nunca recibió:
 
-- **Imagen propia por cupón** (`value.Img`): en la app cada cupón puede mostrar una imagen en vez del texto genérico del tipo de descuento; en el dashboard todos los cupones se siguen mostrando solo con texto.
+- **Imagen propia por cupón** (`value.Img`): en la app cada cupón puede mostrar una imagen en vez del texto genérico del tipo de descuento; en el dashboard todos los cupones se seguían mostrando solo con texto.
 - **Carrusel (Swiper)** para navegar entre multicupones, con spinner de carga (`mostrarSpinner()` / `beforeSend`) mientras llega la respuesta del servidor; en el dashboard no hay ni spinner ni carrusel, se pinta todo de golpe.
-- **Badge "Descuento acumulable"** (`temp_lang['DescuentoACUMULA']`) para cupones marcados como `diferido == 1`; el dashboard no distingue visualmente este tipo de cupón.
+- **Badge "Descuento acumulable"** (`temp_lang['DescuentoACUMULA']`) para cupones marcados como `diferido == 1`; el dashboard no distinguía visualmente este tipo de cupón.
 - **ChequeAhorro con maquetación propia** dentro del listado de "mis vales" (antes se pintaba igual que cualquier otro cupón, ahora tiene su propia cabecera, icono y disposición).
 
-**Esto no es un bug** — es una decisión de diseño/producto de esfuerzo medio-alto (implica maquetar de nuevo dos funciones grandes y probablemente ajustar CSS). Lo dejo documentado para que decidas si merece la pena portarlo y con qué prioridad, pero no lo he tocado.
+### Decisión de alcance (2026-09-23)
+
+Tras revisar el coste de cada pieza, se decidió portar **solo lo funcional, sin el carrusel**:
+
+| Pieza | ¿Se porta? | Motivo |
+|---|---|---|
+| Imagen por cupón (`value.Img`) | ✅ Sí | Aditivo, degrada bien si la API no manda imagen |
+| Badge "Descuento acumulable" | ✅ Sí | Aditivo, i18n y icono ya existían en el dashboard |
+| Tarjeta propia del ChequeAhorro en "mis vales" | ✅ Sí | Aditivo, no requiere marcado PHP nuevo |
+| Carrusel Swiper (`obtener_multicupon`) | ❌ No | El dashboard no tiene el CSS de Swiper ni el marcado del carrusel; tocar la función sin eso dejaría código a medio portar. Esfuerzo alto, se deja para otra sesión si se decide abordarlo. |
+| Agrupación de cupones por concepto (`agruparCuponesPorConcepto`) | ❌ No | Función completamente nueva en la app, no solicitada, no aporta nada sin el rediseño visual completo alrededor. |
+
+**Investigación previa a tocar código** (para no dar nada por hecho):
+- Los contenedores donde se pinta el HTML (`.pagina-tarjeta .grup_cupones`, `.pagina-multi-cupon .otros-cupones-seccion-cupones`) **ya existían** en `tarjetas.php` — no hizo falta tocar PHP.
+- Las claves de idioma `MiChequeAhorro`, `DescuentoACUMULA` y `cheque_canjeable`, y el icono `img/svg/cupon_euro.svg`, **ya existían** en el dashboard — no hizo falta añadir nada de eso.
+- **Colisión detectada y evitada:** la app reutiliza la clase CSS `cheque_ahorro1` para la nueva tarjeta. Pero `tarjetas.php:15` ya usa esa misma clase para un widget distinto (`#mcheque_ahorro1`, el resumen de cheque-ahorro de la cabecera de la página). Copiar la clase tal cual habría alterado ese otro widget sin querer. Se usó un nombre nuevo, `cheque_ahorro_vale`, exclusivo de esta tarjeta.
+
+### Cambios aplicados
+
+**`js/app.js`, función `obtener_vales`** (se modificó tanto el bloque `success` como el `error` — el dashboard duplica la lógica de pintado en ambos para poder mostrar una versión en caché si falla la petición, así que se mantuvieron sincronizados):
+
+1. Se añadió el guard `&& !encontrado_cheque_ahorro` a la condición `es_cheque_ahorro_principal==1`, igual que en la app — evita volver a procesar el bloque de ChequeAhorro si la API alguna vez devolviese más de una fila marcada como principal.
+2. Para cupones normales: si `value.Img` viene informado, se muestra `<img class="imagen_multicupon">` en vez del texto del tipo; si no, se mantiene el comportamiento anterior exactamente igual.
+3. Para cupones con `diferido==1`: se añade `<span class="bloque_cupon_acumula">` con el texto ya traducido `DescuentoACUMULA`.
+4. Para el vale marcado `es_cheque_ahorro==1`: en vez de maquetarse como un cupón cualquiera, ahora se pinta con la clase `cheque_ahorro_vale`, icono `cupon_euro.svg`, título "Mi ChequeAhorro" y solo la primera línea del texto explicativo (antes del primer `<br>`).
+
+**`css/custom.css`** (añadido al final del archivo): reglas para `.bloque_cupon_acumula`, `.imagen_multicupon` y `.cheque_ahorro_vale` (esta última adaptada de la regla `.cheque_ahorro1` de la app, renombrada para evitar la colisión explicada arriba).
+
+**Nota menor:** las reglas de `.cheque_ahorro_vale` usan `font-family: "Nunito"` / `"NunitoMedium"`, que la app tiene cargadas como webfont pero el dashboard no. No se ha importado esa fuente (estaba fuera del alcance "solo funcional") — el texto usará la fuente por defecto del dashboard en su lugar, sin errores, solo con una tipografía ligeramente distinta a la de la app en esa tarjeta concreta.
+
+**Lo que queda pendiente si en el futuro se decide ir a por la paridad completa:** el carrusel Swiper en `obtener_multicupon` (requiere `css/plugins/swiper/swiper.min.css`, que no existe en el dashboard, más marcado nuevo en `tarjetas.php`) y la función de agrupación de cupones.
+
+**Cómo revisarlo en el dashboard:**
+1. Abre `tarjetas.php` con una tarjeta de cliente que tenga vales/cupones activos.
+2. Si algún cupón tiene un vale de tipo "diferido", debe aparecer la etiqueta amarilla "DESCUENTO ACUMULA" debajo del tipo de descuento.
+3. Si la API devuelve imagen (`Img`) para algún vale, debe verse la imagen en vez del texto genérico — si no hay imagen, se ve exactamente igual que antes (esto no lo puedo confirmar desde aquí sin ver una respuesta real de la API).
+4. El vale de ChequeAhorro (si el cliente tiene uno activo) debe verse ahora en una tarjeta verde con su propio icono de euro y el título "Mi ChequeAhorro", diferenciada visualmente del resto de cupones.
+5. Comprueba que el widget de la cabecera de `tarjetas.php` (`#mcheque_ahorro1`, el resumen superior de cheque-ahorro) **no ha cambiado de aspecto** — es la comprobación clave de que no hubo colisión de CSS con la tarjeta nueva.
+6. Activa/desactiva el switch de cualquier cupón (incluido el de ChequeAhorro) para confirmar que sigue funcionando igual que antes.
 
 ---
 
@@ -206,7 +246,7 @@ No requieren ninguna acción — se documentan solo para que quede constancia de
 
 ## Próximos pasos sugeridos
 
-1. **Punto 1** (texto sin traducir): puedo aplicarlo ya, es un cambio pequeño y sin ambigüedad.
-2. **Punto 2** (badge de notificaciones): necesito tu decisión sobre el comportamiento deseado antes de tocar nada.
-3. **Puntos 3 y 5**: decisiones de producto de mayor calado — dime cuáles quieres abordar y con qué prioridad para planificarlos como tareas separadas.
+1. ~~**Punto 1** (texto sin traducir)~~ — ✅ aplicado el 2026-09-23.
+2. ~~**Punto 2** (badge de notificaciones)~~ — ⏸️ en espera por decisión del propietario (2026-09-23): se deja el comportamiento actual.
+3. ~~**Punto 3** (cupones/vales)~~ — ✅ aplicada la parte funcional el 2026-09-23 (sin carrusel, por decisión del propietario). **Punto 5**: sigue pendiente de decisión.
 4. **Punto 4**: en espera, solo se retoma si aparece una incidencia real con el QR.

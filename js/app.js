@@ -2420,7 +2420,7 @@ function obtener_vales(recargado)
 				$.each(res.vales, function(key, value) 
 				{
 					cupones_descargados.push(value.cod_vale);
-					if (value.es_cheque_ahorro_principal==1)
+					if (value.es_cheque_ahorro_principal==1 && !encontrado_cheque_ahorro)
 					{
 						$('.pagina-tarjeta .cheque_ahorro').show();
 						$('.cheque_ahorro .bloque_centro').show();
@@ -2429,7 +2429,7 @@ function obtener_vales(recargado)
 						$('.tot_cheque').html(value.importe_vale+'<span>€</span>');
 						$('.codigo_cheque_ahorro').html(value.cod_vale);
 						$('.tot_desde').html('<i class="fa fa-calendar"></i> '+temp_lang['cheque_canjeable']+' '+value.valido);
-						if (value.proximo_vencimiento==1) 
+						if (value.proximo_vencimiento==1)
 						{
 							cheque_ahorro_cerca_caducar = true;
 							$('.cheque_ahorro .bloque_centro').addClass('va_a_caducar_bloque');
@@ -2443,30 +2443,67 @@ function obtener_vales(recargado)
 					else
 					{
 						console.log('2');
-						algun_vale = true;					
+						algun_vale = true;
 						var html_result = '';
-						html_result+='<div class="row tabler_cupones otros_cupones cupon_'+value.cod_vale+'"><div class="col-xs-3 cup_qty"><h1>'+value.tipo+'</h1></div>';
-						html_result+='<div class="col-xs-6"><p class="otros_cupones_valido';
-						if (value.proximo_vencimiento==1) html_result+=' va_a_caducar';
-						html_result+='"><i class="fa fa-calendar"></i> '+temp_lang['cheque_canjeable']+' '+value.valido+'</p></div>';
-						html_result+='<div class="col-xs-3 cup_state contenedor_switchery_'+value.cod_vale+'"><input value="'+value.cod_vale+'" type="checkbox" class="js-switch_'+value.cod_vale+' btn_activar"/></div>';
-						html_result+='<div class="col-xs-9 cup_name"><h3>'+value.titulo+'</h3>';
-						html_result+='<p>'+value.texto+'</p><p class="otros_cupones_codigo">'+value.cod_vale+'</p></div>';						
-						html_result+='</div>';	
-						$('.pagina-tarjeta .grup_cupones').append(html_result);					
+						if (value.es_cheque_ahorro==1)
+						{
+							//Tarjeta propia para el ChequeAhorro dentro del listado de vales (portado de la app; clase renombrada
+							//a "cheque_ahorro_vale" para no chocar con el widget #mcheque_ahorro1 de esta misma página).
+							html_result+='<div class="row cheque_ahorro_vale tabler_cupones otros_cupones cupon_'+value.cod_vale+'"><div class="col-xs-3 cup_qty"><h1><img src="img/svg/cupon_euro.svg" style="width:80%;">';
+							if (value.diferido==1) html_result+='<br><span class="bloque_cupon_acumula">'+temp_lang['DescuentoACUMULA']+'</span>';
+							html_result+='</h1></div>';
+							html_result+='<div class="col-xs-12 cup_name"><h3 tkey="MiChequeAhorro">'+temp_lang['MiChequeAhorro']+'</h3>';
+							var texto_explicativo = value.texto.split('<br>')[0].replace('&euro;','<span class="euro">&euro;</span>');
+							html_result+='<p>'+texto_explicativo+'</p>';
+							html_result+='<div class="cup_state contenedor_switchery_'+value.cod_vale+'"><input value="'+value.cod_vale+'" type="checkbox" class="js-switch_'+value.cod_vale+' btn_activar"/></div>';
+							html_result+='<p class="otros_cupones_valido';
+							if (value.proximo_vencimiento==1) html_result+=' va_a_caducar';
+							html_result+='"><i class="fa fa-calendar"></i> '+temp_lang['cheque_canjeable']+' '+value.valido+'</p>';
+							html_result+='<p class="otros_cupones_codigo">'+value.cod_vale+'</p></div>';
+							html_result+='</div>';
+						}
+						else
+						{
+							//Imagen propia del cupón si la API la da; si no, se mantiene el texto de siempre.
+							html_result+='<div class="row tabler_cupones otros_cupones cupon_'+value.cod_vale+'"><div class="col-xs-3 cup_qty">';
+							if (value.Img!=undefined&&value.Img!='')
+							{
+								html_result+='<img class="imagen_multicupon" src="'+value.Img+'">';
+								if (value.tipo.indexOf('<img')<0) html_result+='<h1>'+value.tipo;
+							}
+							else html_result+='<h1>'+value.tipo;
+							if (value.diferido==1) html_result+='<br><span class="bloque_cupon_acumula">'+temp_lang['DescuentoACUMULA']+'</span>';
+							html_result+='</h1></div>';
+							html_result+='<div class="col-xs-6"><p class="otros_cupones_valido';
+							if (value.proximo_vencimiento==1) html_result+=' va_a_caducar';
+							html_result+='"><i class="fa fa-calendar"></i> '+temp_lang['cheque_canjeable']+' '+value.valido+'</p></div>';
+							html_result+='<div class="col-xs-3 cup_state contenedor_switchery_'+value.cod_vale+'"><input value="'+value.cod_vale+'" type="checkbox" class="js-switch_'+value.cod_vale+' btn_activar"/></div>';
+							html_result+='<div class="col-xs-9 cup_name"><h3>'+value.titulo+'</h3>';
+							html_result+='<p>'+value.texto+'</p><p class="otros_cupones_codigo">'+value.cod_vale+'</p></div>';
+							html_result+='</div>';
+						}
+						$('.pagina-tarjeta .grup_cupones').append(html_result);
 						if (value.es_cheque_ahorro!=1)
 						{
-							var html_result2 = '';								
-							html_result2+='<div class="row tabler_cupones cupon_'+value.cod_vale+'"><div class="col-xs-3 cup_qty"><h1>'+value.tipo+'</h1></div>';						
+							var html_result2 = '';
+							html_result2+='<div class="row tabler_cupones cupon_'+value.cod_vale+'"><div class="col-xs-3 cup_qty">';
+							if (value.Img!=undefined&&value.Img!='')
+							{
+								html_result2+='<img class="imagen_multicupon" src="'+value.Img+'">';
+								if (value.tipo.indexOf('<img')<0) html_result2+='<h1>'+value.tipo;
+							}
+							else html_result2+='<h1>'+value.tipo;
+							if (value.diferido==1) html_result2+='<br><span class="bloque_cupon_acumula">'+temp_lang['DescuentoACUMULA']+'</span>';
+							html_result2+='</h1></div>';
 							html_result2+='<div class="col-xs-9"><p class="otros_cupones_valido';
-							if (value.proximo_vencimiento==1) html_result2+=' va_a_caducar';											
-							html_result2+='"><i class="fa fa-calendar"></i> '+temp_lang['cheque_canjeable']+' '+value.valido+'</p></div>';						
-							//html_result2+='<div class="col-xs-3 cup_state contenedor_switchery2_'+value.cod_vale+'"><input value="'+value.cod_vale+'" type="checkbox" class="js-switch_seccion_cupones_'+value.cod_vale+' btn_activar"/></div>';						
-							html_result2+='<div class="col-xs-9 cup_name"><h3>'+value.titulo+'</h3>';				
+							if (value.proximo_vencimiento==1) html_result2+=' va_a_caducar';
+							html_result2+='"><i class="fa fa-calendar"></i> '+temp_lang['cheque_canjeable']+' '+value.valido+'</p></div>';
+							//html_result2+='<div class="col-xs-3 cup_state contenedor_switchery2_'+value.cod_vale+'"><input value="'+value.cod_vale+'" type="checkbox" class="js-switch_seccion_cupones_'+value.cod_vale+' btn_activar"/></div>';
+							html_result2+='<div class="col-xs-9 cup_name"><h3>'+value.titulo+'</h3>';
 							html_result2+='<p>'+value.texto+'</p>';
 							//html_result2+='<p class="otros_cupones_codigo">'+value.cod_vale+'</p>';
-							html_result2+='</div>';												
-							html_result2+='</div>';						
+							html_result2+='</div>';
+							html_result2+='</div>';
 							$('.pagina-multi-cupon .otros-cupones-seccion-cupones').append(html_result2);
 						}
 						$('.pagina-multi-cupon .otros-cupones-seccion-cupones').show();
@@ -2543,7 +2580,7 @@ function obtener_vales(recargado)
 			$.each(vales, function(key, value) 
 				{
 					cupones_descargados.push(value.cod_vale);
-					if (value.es_cheque_ahorro_principal==1)
+					if (value.es_cheque_ahorro_principal==1 && !encontrado_cheque_ahorro)
 					{
 						$('.pagina-tarjeta .cheque_ahorro').show();
 						$('.cheque_ahorro .bloque_centro').show();
@@ -2552,7 +2589,7 @@ function obtener_vales(recargado)
 						$('.tot_cheque').html(value.importe_vale+'<span>€</span>');
 						$('.codigo_cheque_ahorro').html(value.cod_vale);
 						$('.tot_desde').html('<i class="fa fa-calendar"></i> '+temp_lang['cheque_canjeable']+' '+value.valido);
-						if (value.proximo_vencimiento==1) 
+						if (value.proximo_vencimiento==1)
 						{
 							cheque_ahorro_cerca_caducar = true;
 							$('.cheque_ahorro .bloque_centro').addClass('va_a_caducar_bloque');
@@ -2565,30 +2602,62 @@ function obtener_vales(recargado)
 					}
 					else
 					{
-						algun_vale = true;					
+						algun_vale = true;
 						var html_result = '';
-						html_result+='<div class="row tabler_cupones otros_cupones cupon_'+value.cod_vale+'"><div class="col-xs-3 cup_qty"><h1>'+value.tipo+'</h1></div>';
-						html_result+='<div class="col-xs-6"><p class="otros_cupones_valido';
-						if (value.proximo_vencimiento==1) html_result+=' va_a_caducar';
-						html_result+='"><i class="fa fa-calendar"></i> '+temp_lang['cheque_canjeable']+' '+value.valido+'</p></div>';
-						html_result+='<div class="col-xs-3 cup_state contenedor_switchery_'+value.cod_vale+'"><input value="'+value.cod_vale+'" type="checkbox" class="js-switch_'+value.cod_vale+' btn_activar"/></div>';
-						html_result+='<div class="col-xs-9 cup_name"><h3>'+value.titulo+'</h3>';
-						html_result+='<p>'+value.texto+'</p><p class="otros_cupones_codigo">'+value.cod_vale+'</p></div>';						
-						html_result+='</div>';	
-						$('.pagina-tarjeta .grup_cupones').append(html_result);					
+						if (value.es_cheque_ahorro==1)
+						{
+							html_result+='<div class="row cheque_ahorro_vale tabler_cupones otros_cupones cupon_'+value.cod_vale+'"><div class="col-xs-3 cup_qty"><h1><img src="img/svg/cupon_euro.svg" style="width:80%;">';
+							if (value.diferido==1) html_result+='<br><span class="bloque_cupon_acumula">'+temp_lang['DescuentoACUMULA']+'</span>';
+							html_result+='</h1></div>';
+							html_result+='<div class="col-xs-12 cup_name"><h3 tkey="MiChequeAhorro">'+temp_lang['MiChequeAhorro']+'</h3>';
+							var texto_explicativo = value.texto.split('<br>')[0].replace('&euro;','<span class="euro">&euro;</span>');
+							html_result+='<p>'+texto_explicativo+'</p>';
+							html_result+='<div class="cup_state contenedor_switchery_'+value.cod_vale+'"><input value="'+value.cod_vale+'" type="checkbox" class="js-switch_'+value.cod_vale+' btn_activar"/></div>';
+							html_result+='<p class="otros_cupones_valido';
+							if (value.proximo_vencimiento==1) html_result+=' va_a_caducar';
+							html_result+='"><i class="fa fa-calendar"></i> '+temp_lang['cheque_canjeable']+' '+value.valido+'</p>';
+							html_result+='<p class="otros_cupones_codigo">'+value.cod_vale+'</p></div>';
+							html_result+='</div>';
+						}
+						else
+						{
+							html_result+='<div class="row tabler_cupones otros_cupones cupon_'+value.cod_vale+'"><div class="col-xs-3 cup_qty">';
+							if (value.Img!=undefined&&value.Img!='')
+							{
+								html_result+='<img class="imagen_multicupon" src="'+value.Img+'">';
+								if (value.tipo.indexOf('<img')<0) html_result+='<h1>'+value.tipo;
+							}
+							else html_result+='<h1>'+value.tipo;
+							if (value.diferido==1) html_result+='<br><span class="bloque_cupon_acumula">'+temp_lang['DescuentoACUMULA']+'</span>';
+							html_result+='</h1></div>';
+							html_result+='<div class="col-xs-6"><p class="otros_cupones_valido';
+							if (value.proximo_vencimiento==1) html_result+=' va_a_caducar';
+							html_result+='"><i class="fa fa-calendar"></i> '+temp_lang['cheque_canjeable']+' '+value.valido+'</p></div>';
+							html_result+='<div class="col-xs-3 cup_state contenedor_switchery_'+value.cod_vale+'"><input value="'+value.cod_vale+'" type="checkbox" class="js-switch_'+value.cod_vale+' btn_activar"/></div>';
+							html_result+='<div class="col-xs-9 cup_name"><h3>'+value.titulo+'</h3>';
+							html_result+='<p>'+value.texto+'</p><p class="otros_cupones_codigo">'+value.cod_vale+'</p></div>';
+							html_result+='</div>';
+						}
+						$('.pagina-tarjeta .grup_cupones').append(html_result);
 						if (value.es_cheque_ahorro!=1)
 						{
-							var html_result2 = '';								
-							html_result2+='<div class="row tabler_cupones cupon_'+value.cod_vale+'"><div class="col-xs-3 cup_qty"><h1>'+value.tipo+'</h1></div>';						
+							var html_result2 = '';
+							html_result2+='<div class="row tabler_cupones cupon_'+value.cod_vale+'"><div class="col-xs-3 cup_qty">';
+							if (value.Img!=undefined&&value.Img!='')
+							{
+								html_result2+='<img class="imagen_multicupon" src="'+value.Img+'">';
+								if (value.tipo.indexOf('<img')<0) html_result2+='<h1>'+value.tipo;
+							}
+							else html_result2+='<h1>'+value.tipo;
+							if (value.diferido==1) html_result2+='<br><span class="bloque_cupon_acumula">'+temp_lang['DescuentoACUMULA']+'</span>';
+							html_result2+='</h1></div>';
 							html_result2+='<div class="col-xs-9"><p class="otros_cupones_valido';
-							if (value.proximo_vencimiento==1) html_result2+=' va_a_caducar';											
-							html_result2+='"><i class="fa fa-calendar"></i> '+temp_lang['cheque_canjeable']+' '+value.valido+'</p></div>';						
-							//html_result2+='<div class="col-xs-3 cup_state contenedor_switchery2_'+value.cod_vale+'"><input value="'+value.cod_vale+'" type="checkbox" class="js-switch_seccion_cupones_'+value.cod_vale+' btn_activar"/></div>';						
-							html_result2+='<div class="col-xs-9 cup_name"><h3>'+value.titulo+'</h3>';				
+							if (value.proximo_vencimiento==1) html_result2+=' va_a_caducar';
+							html_result2+='"><i class="fa fa-calendar"></i> '+temp_lang['cheque_canjeable']+' '+value.valido+'</p></div>';
+							html_result2+='<div class="col-xs-9 cup_name"><h3>'+value.titulo+'</h3>';
 							html_result2+='<p>'+value.texto+'</p>';
-							//html_result2+='<p class="otros_cupones_codigo">'+value.cod_vale+'</p>';
-							html_result2+='</div>';												
-							html_result2+='</div>';						
+							html_result2+='</div>';
+							html_result2+='</div>';
 							$('.pagina-multi-cupon .otros-cupones-seccion-cupones').append(html_result2);
 						}
 						$('.pagina-multi-cupon .otros-cupones-seccion-cupones').show();

@@ -1089,6 +1089,66 @@ button{
 }
 @media (max-width: 1000px){
     .welcome-message-movil {
-        display: block; 
+        display: block;
     }
+}
+
+/* Punto 3 del informe: "mis vales" - imagen por cupon, badge de descuento acumulable
+   y tarjeta propia del ChequeAhorro. Adaptado de css/custom.css de la app. */
+.bloque_cupon_acumula{
+    font-size: 12px;
+    padding: 0px;
+    margin-top: 8px;
+    float: left;
+}
+.imagen_multicupon{
+    width: auto;
+    height: auto;
+    display: block;
+    max-height: 12vh;
+    max-width: 20vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+}
+/* .cheque_ahorro_vale es un nombre propio del dashboard (no existe en la app), para no
+   chocar con la clase .cheque_ahorro1 que tarjetas.php ya usa en el widget #mcheque_ahorro1. */
+.cheque_ahorro_vale{
+    background: #005E49;
+    border-radius: 3vw;
+    margin-bottom: 3vw;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    display: block;
+    text-align: center;
+}
+.cheque_ahorro_vale h3, .cheque_ahorro_vale .otros_cupones_valido, .cheque_ahorro_vale p{
+    color: white;
+}
+.cheque_ahorro_vale h3{
+    font-size: 26px;
+    line-height: 1em;
+    font-weight: normal;
+}
+.cheque_ahorro_vale .cup_qty{
+    display: none;
+}
+.cheque_ahorro_vale .cup_state{
+    float: right;
+    margin-right: 10px;
+    margin-top: -75px;
+}
+.cheque_ahorro_vale .otros_cupones_valido{
+    font-family: "NunitoMedium", sans-serif;
+    font-size: calc((1vw * 3.84) - 1.27px);
+    line-height: 1em;
+}
+.cheque_ahorro_vale .otros_cupones_codigo{
+    font-size: calc((1vw * 3.84) - 1.27px);
+    margin: 0px;
+    font-family: "Nunito", sans-serif !important;
+}
+.cheque_ahorro_vale .euro{
+    font-size: calc(6.53vw - 6.91px);
 }
