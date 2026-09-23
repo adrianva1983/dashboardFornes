@@ -149,9 +149,11 @@ Arquitectura real descubierta (tres copias distintas de la misma lógica):
 
 ### Cambios aplicados — `megacupones.php` (las funciones que realmente se ejecutan)
 
-**`obtener_multicupon()` (línea 258, rejilla "MULTICUPÓN"):** en el bucle de `value.promos`, si `value2.Img` viene informado se muestra `<img class="imagen_multicupon">` en vez del `<h1>` con el tipo de descuento; si no, se comporta igual que antes. Se mantiene la misma rejilla de columnas (`col-xs-4`/`col-xs-6`/`col-xs-2`) sin cambios.
+**`obtener_multicupon()` (línea 258, rejilla "MULTICUPÓN"):** en el bucle de `value.promos`, si `value2.Img` viene informado se muestra `<img class="imagen_multicupon">`. Se mantiene la misma rejilla de columnas (`col-xs-4`/`col-xs-6`/`col-xs-2`) sin cambios.
 
 **`obtener_vales()` (línea 188, lista de "otros vales" bajo la rejilla):** mismo tratamiento de imagen para `value.Img`, más el badge "Descuento acumulable" cuando `value.diferido==1` (esta función nunca renderiza el vale de ChequeAhorro — lo salta explícitamente en la línea 211 — así que no hacía falta portar la tarjeta especial de ChequeAhorro aquí).
+
+**Corrección (misma sesión):** el primer intento sustituía el `<h1>` del tipo de descuento (el porcentaje, "20%", "15%"...) por la imagen — es decir, mostraba imagen **o** porcentaje. Al probarlo en el navegador se vio que en la app se muestran **ambos a la vez** (imagen arriba, porcentaje debajo). Se corrigió para que la imagen se añada *además* del `<h1>` del tipo, no en su lugar — igual que hace la app (con la única excepción de que si `tipo` ya trae una imagen incrustada en el propio HTML, no se duplica el `<h1>`).
 
 ### Cambios aplicados (primer intento, código muerto pero dejado tal cual) — `js/app.js`
 

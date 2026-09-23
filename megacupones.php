@@ -221,7 +221,7 @@ function url_exists($url)
 						{
 							resultado_ajax += '<img class="imagen_multicupon" src="'+value.Img+'">';
 						}
-						else
+						if (value.tipo.indexOf('<img')<0)
 						{
 							resultado_ajax += '<h1>'+value.tipo+'</h1>';
 						}
@@ -310,7 +310,7 @@ function url_exists($url)
 							{
 								resultado_ajax +='<img class="imagen_multicupon" src="'+value2.Img+'">';
 							}
-							else
+							if (value2.tipo.indexOf('<img')<0)
 							{
 								resultado_ajax +='<h1>'+value2.tipo.replace(/EUR/g,'€')+'</h1>';
 							}
