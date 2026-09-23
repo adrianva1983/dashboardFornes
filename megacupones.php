@@ -223,19 +223,19 @@ function url_exists($url)
 						}
 						resultado_ajax +='</div>';
 						resultado_ajax +='<div class="col-xs-9 cup_name">';
-						if (value.tipo.indexOf('<img')<0)
-						{
-							resultado_ajax += '<h1>'+value.tipo+'</h1>';
-						}
 						if (value.es_cheque_ahorro==1){
 							resultado_ajax +='<h3';
 							if (resaltar == value.cod_vale) resultado_ajax += ' class="va_a_caducar"';
-							resultado_ajax += '>'+temp_lang["MiChequeAhorro"]+'</h3>';
+							resultado_ajax += '>';
+							if (value.tipo.indexOf('<img')<0) resultado_ajax += '<span class="porcentaje_multicupon">'+value.tipo+'</span> ';
+							resultado_ajax += temp_lang["MiChequeAhorro"]+'</h3>';
 						}
 						else{
 							resultado_ajax +='<h3';
 							if (resaltar == value.cod_vale) resultado_ajax += ' class="va_a_caducar"';
-							resultado_ajax += '>'+value.titulo+'</h3><p>'+value.texto+'</p>';
+							resultado_ajax += '>';
+							if (value.tipo.indexOf('<img')<0) resultado_ajax += '<span class="porcentaje_multicupon">'+value.tipo+'</span> ';
+							resultado_ajax += value.titulo+'</h3><p>'+value.texto+'</p>';
 							if (value.diferido==1) resultado_ajax += '<span class="bloque_cupon_acumula">'+temp_lang['DescuentoACUMULA']+'</span>';
 						}
 						resultado_ajax +='<p class="otros_cupones_valido';						
@@ -312,11 +312,11 @@ function url_exists($url)
 								resultado_ajax +='<img class="imagen_multicupon" src="'+value2.Img+'">';
 							}
 							resultado_ajax +='</div><div class="col-xs-6 cup_name">';
+							resultado_ajax +='<h3>';
 							if (value2.tipo.indexOf('<img')<0)
 							{
-								resultado_ajax +='<h1>'+value2.tipo.replace(/EUR/g,'€')+'</h1>';
+								resultado_ajax +='<span class="porcentaje_multicupon">'+value2.tipo.replace(/EUR/g,'€')+'</span> ';
 							}
-							resultado_ajax +='<h3>';
 							resultado_ajax += value2.titulo.replace(/EUR/g,'€');;
 							resultado_ajax +='</h3><p>';
 							resultado_ajax += value2.texto.replace(/EUR/g,'€');;

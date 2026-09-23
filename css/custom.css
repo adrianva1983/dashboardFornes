@@ -89,6 +89,15 @@ img.menu_izquierda{max-height:20px !important;max-width:20px !important;}
 	font-family: RooneySansBlack;
 	color:#005e49;
 }
+/* Porcentaje/tipo de descuento en la misma linea del titulo (megacupones.php);
+   mismo estilo que .cup_qty h1 de arriba, pero como span en linea, no en la columna de la imagen. */
+.grup_cupones .cup_name h3 .porcentaje_multicupon {
+    font-size: 27px;
+    font-weight: bold;
+	font-family: RooneySansBlack;
+	color: #005e49;
+	margin-right: 8px;
+}
 .cabecera-ticket-multicupon {
     background-image: url(../img/svg/tarjeta/multicupon.svg);
     background-repeat: no-repeat;

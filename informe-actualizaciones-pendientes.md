@@ -155,7 +155,9 @@ Arquitectura real descubierta (tres copias distintas de la misma lógica):
 
 **Corrección 1 (misma sesión):** el primer intento sustituía el `<h1>` del tipo de descuento (el porcentaje, "20%", "15%"...) por la imagen — es decir, mostraba imagen **o** porcentaje. Al probarlo en el navegador se vio que en la app se muestran **ambos a la vez**. Se corrigió para que la imagen se añada *además* del `<h1>` del tipo, no en su lugar (con la única excepción de que si `tipo` ya trae una imagen incrustada en el propio HTML, no se duplica el `<h1>`).
 
-**Corrección 2 (misma sesión):** tras la corrección 1, el porcentaje seguía apareciendo debajo de la imagen en la columna estrecha de la izquierda (`cup_qty`), separado del título. Se movió para que se pinte junto al título, dentro de la misma columna de texto (`cup_name`), justo antes del `<h3>` — la columna de la imagen (`cup_qty`) ahora solo contiene la imagen.
+**Corrección 2 (misma sesión):** tras la corrección 1, el porcentaje seguía apareciendo debajo de la imagen en la columna estrecha de la izquierda (`cup_qty`), separado del título. Se movió para que se pinte junto al título, dentro de la misma columna de texto (`cup_name`).
+
+**Corrección 3 (misma sesión):** al moverlo, el porcentaje pasó a verse en su propia línea (como `<h1>` suelto) y sin el estilo verde/negrita que tenía en `cup_qty` — se veía en gris, con el estilo por defecto del navegador. Se cambió a un `<span class="porcentaje_multicupon">` **dentro** del propio `<h3>` del título, de forma que queden en la misma línea ("20% GULLON"), y se añadió en `css/custom.css` la regla `.grup_cupones .cup_name h3 .porcentaje_multicupon` con el mismo estilo (27px, negrita, verde `#005e49`) que ya usaba `.cup_qty h1` antes de moverlo — así se conserva el aspecto de la app pero aprovechando el espacio horizontal extra del dashboard.
 
 ### Cambios aplicados (primer intento, código muerto pero dejado tal cual) — `js/app.js`
 
