@@ -275,7 +275,7 @@ var lang_en = {
 	"donde_num_tarjeta_subtexto5":"Employee/Authorised Card",
 	"Instalar esta app":"Install this app",
 	"AHORAACUMULA":"ACCUMULATE to your ChequeAhorro!",
-	"DescuentoACUMULA":"DISCOUNT<br/>ACCUMULATE",
+	"DescuentoACUMULA":"DISCOUNT ACCUMULATE",
 	"EnviarEmail":"Send Email to support",
 	"Asunto":"Subject",
 	"Mensaje":"Message",

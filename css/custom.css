@@ -160,6 +160,41 @@ img.menu_izquierda{max-height:20px !important;max-width:20px !important;}
     text-align: center;
     padding: 10px;
 }
+/* Cabecera de "Mi Multicupon" en movil: icono junto al titulo en vez de apilados y
+   centrados, para acercarse a como se ve en la app. */
+@media (max-width: 767px) {
+    .grup_cupones .row.tabler.multi {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 10px 15px;
+    }
+    .grup_cupones .row.tabler.multi .cabecera-ticket-multicupon {
+        width: 55px;
+        min-width: 55px;
+        height: 55px;
+        background-size: 45px;
+        flex: 0 0 auto;
+    }
+    .grup_cupones .row.tabler.multi .cup_name.multi:not(.fecha_seccion_multi) {
+        flex: 1 1 auto;
+        text-align: left;
+    }
+    .grup_cupones .row.tabler.multi .titulo_seccion_multi {
+        font-size: 22px;
+        line-height: 1.2;
+        padding: 0;
+        text-align: left;
+    }
+    .grup_cupones .row.tabler.multi .mensaje_multicupon {
+        text-align: left;
+    }
+    .grup_cupones .row.tabler.multi .fecha_seccion_multi {
+        flex: 0 0 100%;
+        text-align: left;
+        padding: 5px 0 0;
+    }
+}
 .pagina-ahorro h4 {
     float: left;
 }

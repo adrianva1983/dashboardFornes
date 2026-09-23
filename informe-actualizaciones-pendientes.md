@@ -166,6 +166,10 @@ Arquitectura real descubierta (tres copias distintas de la misma lógica):
 - El encabezado decía "MULTICUPÓN"; en la app dice "Mi Multicupón" con un subtítulo en rojo "¡ACUMULA en tu ChequeAhorro!" debajo. Se actualizó la clave de idioma `Multicupon` (ya existía, solo desactualizada) en los tres idiomas, y se añadió el subtítulo usando la clave `AHORAACUMULA` (también ya existía pero con un texto distinto al de la app — se sincronizó) junto con una clase CSS nueva `.mensaje_multicupon` (roja, negrita) que tampoco existía en el dashboard.
 - **Se decidió NO cambiar** el contenedor de cada cupón (caja con borde verde discontinuo, `.recorte`) por el listado plano sin bordes que usa la app — es el estilo propio del dashboard (INSPINIA), compartido con otras pantallas, y cambiarlo aquí rompería la consistencia visual del resto del sitio.
 
+**Corrección 6 (misma sesión, tras revisar en móvil):**
+- "DESCUENTO ACUMULA" se veía en dos líneas porque la clave de idioma `DescuentoACUMULA` traía un `<br/>` incrustado en el propio texto (`"DESCUENTO<br/>ACUMULA"`), heredado de la app (donde también se ve en dos líneas, por el ancho de pantalla móvil). Se quitó el `<br/>` en los tres idiomas para que quede en una sola línea, aprovechando que en el dashboard hay más espacio horizontal.
+- La cabecera "Mi Multicupón" en vista móvil se veía apilada y centrada (icono arriba, título centrado en dos líneas debajo), muy distinta de la app (icono pequeño a la izquierda, título a su lado, todo alineado a la izquierda). Añadido un media query (`max-width: 767px`) que en pantallas estrechas pone el icono y el título en la misma fila, reduce el tamaño del icono y del texto, y alinea todo a la izquierda — sin tocar el layout de escritorio (3 columnas), que no tenía este problema.
+
 ### Cambios aplicados (primer intento, código muerto pero dejado tal cual) — `js/app.js`
 
 **`js/app.js`, función `obtener_vales`** (se modificó tanto el bloque `success` como el `error` — el dashboard duplica la lógica de pintado en ambos para poder mostrar una versión en caché si falla la petición, así que se mantuvieron sincronizados):

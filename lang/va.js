@@ -275,7 +275,7 @@ var lang_va = {
 	"donde_num_tarjeta_subtexto5":"Targeta empleat/autoritzat",
 	"Instalar esta app":"Instal·lar esta app",
 	"AHORAACUMULA":"ACUMULA en el teu XecEstalvi!",
-	"DescuentoACUMULA":"DESCOMPTE<br/>ACUMULA",
+	"DescuentoACUMULA":"DESCOMPTE ACUMULA",
 	"EnviarEmail":"Enviar Email al suport",
 	"Asunto":"Assumpte",
 	"Mensaje":"Missatge",
