@@ -137,7 +137,23 @@ Tras revisar el coste de cada pieza, se decidió portar **solo lo funcional, sin
 - Las claves de idioma `MiChequeAhorro`, `DescuentoACUMULA` y `cheque_canjeable`, y el icono `img/svg/cupon_euro.svg`, **ya existían** en el dashboard — no hizo falta añadir nada de eso.
 - **Colisión detectada y evitada:** la app reutiliza la clase CSS `cheque_ahorro1` para la nueva tarjeta. Pero `tarjetas.php:15` ya usa esa misma clase para un widget distinto (`#mcheque_ahorro1`, el resumen de cheque-ahorro de la cabecera de la página). Copiar la clase tal cual habría alterado ese otro widget sin querer. Se usó un nombre nuevo, `cheque_ahorro_vale`, exclusivo de esta tarjeta.
 
-### Cambios aplicados
+### ⚠️ Corrección importante descubierta después de implementar (2026-09-23)
+
+El primer intento de este punto modificó `js/app.js` (ver más abajo), pero **resultó ser código muerto**: ni `tarjetas.php` ni `megacupones.php` cargan `js/app.js`. Cada una tiene su propia copia de `obtener_multicupon()`/`obtener_vales()` escrita como `<script>` inline dentro del propio PHP, totalmente independiente. Encontrado tras revisar en el navegador que las imágenes no aparecían.
+
+Arquitectura real descubierta (tres copias distintas de la misma lógica):
+1. **`tarjetas.php:124`** — su propia `obtener_multicupon()`, y **`tarjetas.php:324`** — `obtener_vales1()`, que solo mantiene vivos los widgets `.cheque_ahorro`/`.cheque_ahorro1`; su parte de "otros vales" tiene el `.append()` comentado a propósito (deshabilitado para no duplicar con el punto 2).
+2. **`megacupones.php:258`** — su **propia** `obtener_multicupon()`, que sobrescribe a la de `tarjetas.php` (esta página hace `require "tarjetas.php"` y luego redefine la función). Es la que pinta la rejilla "MULTICUPÓN" de la captura de pantalla. **Corregida.**
+3. **`megacupones.php:188`** — su **propia** `obtener_vales()`, que sí pinta la lista de "otros vales" en `.wrapper-content-cupones` (bajo la rejilla de multicupón). **Corregida.**
+4. **`js/app.js`** — la copia que edité primero, que no se ejecuta desde ninguna página del dashboard. Se deja el cambio hecho (es inofensivo, ya que no se ejecuta) por si en el futuro se decide que estas páginas pasen a usar el `app.js` compartido en vez de tener su propia copia — pero **el fix real está en `megacupones.php`**.
+
+### Cambios aplicados — `megacupones.php` (las funciones que realmente se ejecutan)
+
+**`obtener_multicupon()` (línea 258, rejilla "MULTICUPÓN"):** en el bucle de `value.promos`, si `value2.Img` viene informado se muestra `<img class="imagen_multicupon">` en vez del `<h1>` con el tipo de descuento; si no, se comporta igual que antes. Se mantiene la misma rejilla de columnas (`col-xs-4`/`col-xs-6`/`col-xs-2`) sin cambios.
+
+**`obtener_vales()` (línea 188, lista de "otros vales" bajo la rejilla):** mismo tratamiento de imagen para `value.Img`, más el badge "Descuento acumulable" cuando `value.diferido==1` (esta función nunca renderiza el vale de ChequeAhorro — lo salta explícitamente en la línea 211 — así que no hacía falta portar la tarjeta especial de ChequeAhorro aquí).
+
+### Cambios aplicados (primer intento, código muerto pero dejado tal cual) — `js/app.js`
 
 **`js/app.js`, función `obtener_vales`** (se modificó tanto el bloque `success` como el `error` — el dashboard duplica la lógica de pintado en ambos para poder mostrar una versión en caché si falla la petición, así que se mantuvieron sincronizados):
 
@@ -153,12 +169,11 @@ Tras revisar el coste de cada pieza, se decidió portar **solo lo funcional, sin
 **Lo que queda pendiente si en el futuro se decide ir a por la paridad completa:** el carrusel Swiper en `obtener_multicupon` (requiere `css/plugins/swiper/swiper.min.css`, que no existe en el dashboard, más marcado nuevo en `tarjetas.php`) y la función de agrupación de cupones.
 
 **Cómo revisarlo en el dashboard:**
-1. Abre `tarjetas.php` con una tarjeta de cliente que tenga vales/cupones activos.
-2. Si algún cupón tiene un vale de tipo "diferido", debe aparecer la etiqueta amarilla "DESCUENTO ACUMULA" debajo del tipo de descuento.
-3. Si la API devuelve imagen (`Img`) para algún vale, debe verse la imagen en vez del texto genérico — si no hay imagen, se ve exactamente igual que antes (esto no lo puedo confirmar desde aquí sin ver una respuesta real de la API).
-4. El vale de ChequeAhorro (si el cliente tiene uno activo) debe verse ahora en una tarjeta verde con su propio icono de euro y el título "Mi ChequeAhorro", diferenciada visualmente del resto de cupones.
-5. Comprueba que el widget de la cabecera de `tarjetas.php` (`#mcheque_ahorro1`, el resumen superior de cheque-ahorro) **no ha cambiado de aspecto** — es la comprobación clave de que no hubo colisión de CSS con la tarjeta nueva.
-6. Activa/desactiva el switch de cualquier cupón (incluido el de ChequeAhorro) para confirmar que sigue funcionando igual que antes.
+1. Abre `megacupones.php` (menú "Cupones") con una tarjeta de cliente que tenga multicupón y/o vales activos.
+2. En la rejilla "MULTICUPÓN" de arriba: si algún producto de la API trae imagen, debe verse la imagen en vez del porcentaje/tipo de descuento en la casilla izquierda. Si no trae imagen, se ve exactamente igual que antes (no puedo confirmar desde aquí si la API ya envía imágenes en este entorno para este endpoint).
+3. En la lista de "otros vales" de más abajo: mismo comportamiento de imagen, más la etiqueta amarilla "DESCUENTO ACUMULA" para los vales marcados como diferidos.
+4. El widget de ChequeAhorro de la cabecera de la página (fuera de esta rejilla) no debería haber cambiado — esta función lo excluye explícitamente de su renderizado.
+5. Revisa la consola del navegador (F12) para descartar errores JS al cargar `megacupones.php`.
 
 ---
 

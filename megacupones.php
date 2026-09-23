@@ -216,19 +216,27 @@ function url_exists($url)
 						if (num_elto==1) resultado_ajax +='<div class="row tam_cupon_row">';
 						resultado_ajax +='<div class="col-md-4 col-xs-12 tam_cupon_col"><div class="recorte';
 						if (resaltar == value.cod_vale) resultado_ajax += ' resaltar_cupon';
-						resultado_ajax += '"><div class="col-xs-3 cup_qty"><h1>';
-						resultado_ajax += value.tipo;
-						resultado_ajax +='</h1></div>';
+						resultado_ajax += '"><div class="col-xs-3 cup_qty">';
+						if (value.Img!=undefined&&value.Img!='')
+						{
+							resultado_ajax += '<img class="imagen_multicupon" src="'+value.Img+'">';
+						}
+						else
+						{
+							resultado_ajax += '<h1>'+value.tipo+'</h1>';
+						}
+						resultado_ajax +='</div>';
 						if (value.es_cheque_ahorro==1){
-							resultado_ajax +='<div class="col-xs-9 cup_name"><h3';	
+							resultado_ajax +='<div class="col-xs-9 cup_name"><h3';
 							if (resaltar == value.cod_vale) resultado_ajax += ' class="va_a_caducar"';
 							resultado_ajax += '>'+temp_lang["MiChequeAhorro"]+'</h3>';
-						} 
+						}
 						else{
 							resultado_ajax +='<div class="col-xs-9 cup_name"><h3';
 							if (resaltar == value.cod_vale) resultado_ajax += ' class="va_a_caducar"';
 							resultado_ajax += '>'+value.titulo+'</h3><p>'+value.texto+'</p>';
-						} 
+							if (value.diferido==1) resultado_ajax += '<span class="bloque_cupon_acumula">'+temp_lang['DescuentoACUMULA']+'</span>';
+						}
 						resultado_ajax +='<p class="otros_cupones_valido';						
 						if (value.proximo_vencimiento==1) resultado_ajax+=' va_a_caducar';
 						resultado_ajax+='">'+temp_lang["cheque_canjeable"]+' '+value.valido+'</p></div>';
@@ -294,17 +302,26 @@ function url_exists($url)
 						else resultado_ajax += '</p></div></div>';
 						resultado_ajax +='</div><div class="row tabler">';
 						var num_elto = 1;
-						$.each(value.promos, function(key2, value2) 
+						$.each(value.promos, function(key2, value2)
 						{
 							if (num_elto==1) resultado_ajax +='<div class="row tam_cupon_row">';
-							resultado_ajax +='<div class="col-md-4 col-xs-12 tam_cupon_col"><div class="recorte"><div class="col-xs-4 cup_qty"><h1>';
-							resultado_ajax += value2.tipo.replace(/EUR/g,'€');
-							resultado_ajax +='</h1></div><div class="col-xs-6 cup_name"><h3>';
+							resultado_ajax +='<div class="col-md-4 col-xs-12 tam_cupon_col"><div class="recorte"><div class="col-xs-4 cup_qty">';
+							if (value2.Img!=undefined&&value2.Img!='')
+							{
+								resultado_ajax +='<img class="imagen_multicupon" src="'+value2.Img+'">';
+							}
+							else
+							{
+								resultado_ajax +='<h1>'+value2.tipo.replace(/EUR/g,'€')+'</h1>';
+							}
+							resultado_ajax +='</div><div class="col-xs-6 cup_name"><h3>';
 							resultado_ajax += value2.titulo.replace(/EUR/g,'€');;
 							resultado_ajax +='</h3><p>';
 							resultado_ajax += value2.texto.replace(/EUR/g,'€');;
-							resultado_ajax +='</p></div><div class="col-xs-2 cup_state"></div></div></div>';
-							if (num_elto == 3) 
+							resultado_ajax +='</p>';
+							if (value2.diferido==1) resultado_ajax +='<span class="bloque_cupon_acumula">'+temp_lang['DescuentoACUMULA']+'</span>';
+							resultado_ajax +='</div><div class="col-xs-2 cup_state"></div></div></div>';
+							if (num_elto == 3)
 							{
 								num_elto = 1;
 								resultado_ajax+='</div>';
