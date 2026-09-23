@@ -222,6 +222,8 @@ var lang_es = {
 	"problema_gps":"Problema GPS",
 	"permiso_gps_denegado":"Ha denegado el permiso para acceder al GPS de su teléfono. No se puede encontrar su ubicación.",
 	"sin_conexion_perfil":"No tiene conexión para acceder a esta sección",
+	"sin_notificaciones":"No hay notificaciones disponibles",
+	"sin_notificaciones_exp":"Cuando tengas una nueva notificación, te lo indicaremos en la campana de tu pantalla de inicio",
 	"SeleccionReseteada":"Deselección de cupones",
 	"SeleccionReseteadaTexto":"Cupones deseleccionados por tiempo de inactividad y detección de canjeos",
 	"Llevas":"Llevas",

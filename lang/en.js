@@ -222,6 +222,8 @@ var lang_en = {
 	"problema_gps":"GPS problem",
 	"permiso_gps_denegado":"You have denied permission to access the GPS on your phone. Your location cannot be centered.",
 	"sin_conexion_perfil":"You do not have connectivity to access this section",
+	"sin_notificaciones":"No notifications available",
+	"sin_notificaciones_exp":"When you have a new notification, we will indicate it in the bell on your home screen.",
 	"SeleccionReseteada":"Vouchers reset",
 	"SeleccionReseteadaTexto":"Reset voucher selection for downtime and redemption detection",
 	"Llevas":"Has",

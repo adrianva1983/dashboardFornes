@@ -2385,7 +2385,7 @@ function obtener_mensajes(todas,vistas)
 				}
 				else
 				{
-					$('#lista1').html('<div class="row lista_prod"><div class="col-xs-8 col-xs-offset-1 prod_data"><p class="prod_env">No tiene ningún mensaje nuevo.</p></div><div class="col-xs-2 prod_activo">&nbsp;</div></div>');					
+					$('#lista1').html('<div class="row lista_prod"><div class="col-xs-8 col-xs-offset-1 prod_data"><p class="prod_env">'+temp_lang['sin_notificaciones']+'</p></div><div class="col-xs-2 prod_activo">&nbsp;</div></div>');
 				}		
 			}
 		},

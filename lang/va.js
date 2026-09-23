@@ -222,6 +222,8 @@ var lang_va = {
 	"problema_gps":"Problema GPS",
 	"permiso_gps_denegado":"Ha denegat permís per a accedir al GPS del seu telèfon. No es pot centrar la seua ubicació.",
 	"sin_conexion_perfil":"No té connectivitat per a accedir a esta secció",
+	"sin_notificaciones":"No hi han notificacions disponibles",
+	"sin_notificaciones_exp":"Quan tingues una nova notificació, t'ho indicarem en la campana de la teua pantalla d'inici",
 	"SeleccionReseteada":"Deselecció de cupons",
 	"SeleccionReseteadaTexto":"Cupons deseleccionats per temps d'inactivitat i detecció de bescanvis",
 	"Llevas":"Portes",
