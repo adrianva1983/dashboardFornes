@@ -153,7 +153,9 @@ Arquitectura real descubierta (tres copias distintas de la misma lógica):
 
 **`obtener_vales()` (línea 188, lista de "otros vales" bajo la rejilla):** mismo tratamiento de imagen para `value.Img`, más el badge "Descuento acumulable" cuando `value.diferido==1` (esta función nunca renderiza el vale de ChequeAhorro — lo salta explícitamente en la línea 211 — así que no hacía falta portar la tarjeta especial de ChequeAhorro aquí).
 
-**Corrección (misma sesión):** el primer intento sustituía el `<h1>` del tipo de descuento (el porcentaje, "20%", "15%"...) por la imagen — es decir, mostraba imagen **o** porcentaje. Al probarlo en el navegador se vio que en la app se muestran **ambos a la vez** (imagen arriba, porcentaje debajo). Se corrigió para que la imagen se añada *además* del `<h1>` del tipo, no en su lugar — igual que hace la app (con la única excepción de que si `tipo` ya trae una imagen incrustada en el propio HTML, no se duplica el `<h1>`).
+**Corrección 1 (misma sesión):** el primer intento sustituía el `<h1>` del tipo de descuento (el porcentaje, "20%", "15%"...) por la imagen — es decir, mostraba imagen **o** porcentaje. Al probarlo en el navegador se vio que en la app se muestran **ambos a la vez**. Se corrigió para que la imagen se añada *además* del `<h1>` del tipo, no en su lugar (con la única excepción de que si `tipo` ya trae una imagen incrustada en el propio HTML, no se duplica el `<h1>`).
+
+**Corrección 2 (misma sesión):** tras la corrección 1, el porcentaje seguía apareciendo debajo de la imagen en la columna estrecha de la izquierda (`cup_qty`), separado del título. Se movió para que se pinte junto al título, dentro de la misma columna de texto (`cup_name`), justo antes del `<h3>` — la columna de la imagen (`cup_qty`) ahora solo contiene la imagen.
 
 ### Cambios aplicados (primer intento, código muerto pero dejado tal cual) — `js/app.js`
 
