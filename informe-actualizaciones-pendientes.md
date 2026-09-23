@@ -159,6 +159,8 @@ Arquitectura real descubierta (tres copias distintas de la misma lógica):
 
 **Corrección 3 (misma sesión):** al moverlo, el porcentaje pasó a verse en su propia línea (como `<h1>` suelto) y sin el estilo verde/negrita que tenía en `cup_qty` — se veía en gris, con el estilo por defecto del navegador. Se cambió a un `<span class="porcentaje_multicupon">` **dentro** del propio `<h3>` del título, de forma que queden en la misma línea ("20% GULLON"), y se añadió en `css/custom.css` la regla `.grup_cupones .cup_name h3 .porcentaje_multicupon` con el mismo estilo (27px, negrita, verde `#005e49`) que ya usaba `.cup_qty h1` antes de moverlo — así se conserva el aspecto de la app pero aprovechando el espacio horizontal extra del dashboard.
 
+**Corrección 4 (misma sesión):** en algunos productos (ej. Colgate) la imagen se montaba encima del texto del título. Causa: la regla `.imagen_multicupon` limitaba el ancho a `max-width: 20vw` (un valor fijo relativo al viewport), no al ancho real de su columna — con una imagen de proporción más ancha de lo habitual, se salía de la columna `cup_qty` e invadía la columna del texto. Cambiado a `max-width: 100%`, que ata la imagen al ancho de su columna sin importar el tamaño de pantalla ni las proporciones de la foto concreta.
+
 ### Cambios aplicados (primer intento, código muerto pero dejado tal cual) — `js/app.js`
 
 **`js/app.js`, función `obtener_vales`** (se modificó tanto el bloque `success` como el `error` — el dashboard duplica la lógica de pintado en ambos para poder mostrar una versión en caché si falla la petición, así que se mantuvieron sincronizados):
