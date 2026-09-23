@@ -18,7 +18,7 @@
 | 0 | Total de "Mi ChequeAhorro" mal calculado | `ahorro.php` | ✅ **Ya corregido** (esta sesión) | — | Bug |
 | 1 | Texto "sin notificaciones" no traducido | `js/app.js`, `lang/*.js` | ✅ **Ya corregido** (esta sesión) | — | Bug menor / i18n |
 | 2 | Badge de notificaciones no se oculta con `vistas=1` | `js/app.js`, `herramientas/menu.php` | ⏸️ **En espera** — se deja como está por decisión del propietario (2026-09-23) | Bajo | Comportamiento a confirmar |
-| 3 | Cupones / Multicupón / Vales sin el rediseño de la app | `tarjetas.php`, `megacupones.php`, `js/app.js`, `css/custom.css` | ✅ **Parcialmente corregido** (esta sesión) — solo `obtener_vales`, sin carrusel | Medio (de lo acordado) | Producto / diseño |
+| 3 | Cupones / Multicupón / Vales sin el rediseño de la app | `megacupones.php`, `css/custom.css`, `lang/*.js` | ✅ **Dado por cerrado** (esta sesión) — solo la parte funcional acordada, sin carrusel; ver detalle | Medio (de lo acordado) | Producto / diseño |
 | 4 | QR de la tarjeta con librería antigua | `tarjetas.php`, `js/app.js`, `js/qrcode.js` | Pendiente — sin evidencia de fallo | Medio | Técnico, sin urgencia |
 | 5 | Falta "Eliminar cuenta" y "Cambiar email" | `perfil.php` | Pendiente | Alto | Producto / posible tema legal (RGPD) |
 
@@ -107,7 +107,9 @@ En el dashboard, esa lógica no existe: con los mismos parámetros (`vistas=1`) 
 
 ---
 
-## 3. [Parcialmente corregido] Cupones / Multicupón / "Mis vales" — rediseño no portado
+## 3. [Cerrado] Cupones / Multicupón / "Mis vales" — rediseño no portado
+
+> **Cierre (2026-09-23):** dado por finalizado tras varias rondas de ajuste guiadas por capturas de pantalla (imagen por cupón, badge "Descuento acumula", tarjeta de ChequeAhorro, cabecera "Mi Multicupón"). El carrusel Swiper y la agrupación por concepto quedan fuera, como se acordó al principio — si en el futuro se quiere ir a por la paridad completa, retomar desde la sección "Lo que queda pendiente" más abajo.
 
 **Dónde:**
 - `obtener_multicupon` — dashboard: `js/app.js:1921-2120` (200 líneas) / app: `js/app.js:2105-2497` (393 líneas). Se usa desde `tarjetas.php`. **No tocada.**
@@ -280,5 +282,6 @@ No requieren ninguna acción — se documentan solo para que quede constancia de
 
 1. ~~**Punto 1** (texto sin traducir)~~ — ✅ aplicado el 2026-09-23.
 2. ~~**Punto 2** (badge de notificaciones)~~ — ⏸️ en espera por decisión del propietario (2026-09-23): se deja el comportamiento actual.
-3. ~~**Punto 3** (cupones/vales)~~ — ✅ aplicada la parte funcional el 2026-09-23 (sin carrusel, por decisión del propietario). **Punto 5**: sigue pendiente de decisión.
-4. **Punto 4**: en espera, solo se retoma si aparece una incidencia real con el QR.
+3. ~~**Punto 3** (cupones/vales)~~ — ✅ dado por cerrado el 2026-09-23 (parte funcional acordada, sin carrusel).
+4. **Punto 4** (QR): en espera, solo se retoma si aparece una incidencia real.
+5. **Punto 5** (eliminar cuenta / cambiar email): sigue pendiente de decisión — es el único hallazgo del informe original sin resolver.
