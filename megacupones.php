@@ -235,8 +235,9 @@ function url_exists($url)
 							if (resaltar == value.cod_vale) resultado_ajax += ' class="va_a_caducar"';
 							resultado_ajax += '>';
 							if (value.tipo.indexOf('<img')<0) resultado_ajax += '<span class="porcentaje_multicupon">'+value.tipo+'</span> ';
-							resultado_ajax += value.titulo+'</h3><p>'+value.texto+'</p>';
+							resultado_ajax += value.titulo+'</h3>';
 							if (value.diferido==1) resultado_ajax += '<span class="bloque_cupon_acumula">'+temp_lang['DescuentoACUMULA']+'</span>';
+							resultado_ajax += '<p>'+value.texto+'</p>';
 						}
 						resultado_ajax +='<p class="otros_cupones_valido';						
 						if (value.proximo_vencimiento==1) resultado_ajax+=' va_a_caducar';
@@ -287,11 +288,11 @@ function url_exists($url)
 						if (res.multicupones.length>1){
 							resultado_ajax += '<div class="grup_cupones"><div class="row tabler multi"><div class="col-md-3 col-xs-12 cup_qty cabecera-ticket-multicupon"></div><div class="col-md-3 col-xs-12 cup_name multi"><h3 class="titulo_seccion_multi';
 							if (resaltar == value.cod_multicupon) resultado_ajax += ' va_a_caducar';
-							resultado_ajax += '">'+temp_lang['Multicupon']+'</h3></div><div class="col-md-3 col-xs-12 cup_name multi fecha_seccion_multi"><p>';
+							resultado_ajax += '">'+temp_lang['Multicupon']+'</h3><span class="mensaje_multicupon">'+temp_lang['AHORAACUMULA']+'</span></div><div class="col-md-3 col-xs-12 cup_name multi fecha_seccion_multi"><p>';
 						} else{
 							resultado_ajax += '<div class="grup_cupones"><div class="row tabler multi"><div class="col-md-4 col-xs-12 cup_qty cabecera-ticket-multicupon"></div><div class="col-md-4 col-xs-12 cup_name multi"><h3 class="titulo_seccion_multi';
 							if (resaltar == value.cod_multicupon) resultado_ajax += ' va_a_caducar';
-							resultado_ajax += '">'+temp_lang['Multicupon']+'</h3></div><div class="col-md-4 col-xs-12 cup_name multi fecha_seccion_multi"><p>';
+							resultado_ajax += '">'+temp_lang['Multicupon']+'</h3><span class="mensaje_multicupon">'+temp_lang['AHORAACUMULA']+'</span></div><div class="col-md-4 col-xs-12 cup_name multi fecha_seccion_multi"><p>';
 						} 
 						resultado_ajax += ''+temp_lang['ValidoDel']+'<br/>'+value.fecha_ini_redencion;
 						resultado_ajax += ' al '+value.fecha_fin_redencion;
@@ -318,10 +319,11 @@ function url_exists($url)
 								resultado_ajax +='<span class="porcentaje_multicupon">'+value2.tipo.replace(/EUR/g,'€')+'</span> ';
 							}
 							resultado_ajax += value2.titulo.replace(/EUR/g,'€');;
-							resultado_ajax +='</h3><p>';
+							resultado_ajax +='</h3>';
+							if (value2.diferido==1) resultado_ajax +='<span class="bloque_cupon_acumula">'+temp_lang['DescuentoACUMULA']+'</span>';
+							resultado_ajax +='<p>';
 							resultado_ajax += value2.texto.replace(/EUR/g,'€');;
 							resultado_ajax +='</p>';
-							if (value2.diferido==1) resultado_ajax +='<span class="bloque_cupon_acumula">'+temp_lang['DescuentoACUMULA']+'</span>';
 							resultado_ajax +='</div><div class="col-xs-2 cup_state"></div></div></div>';
 							if (num_elto == 3)
 							{

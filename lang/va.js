@@ -26,7 +26,7 @@ var lang_va = {
 	//pagina-portada
 	"Cupones":"Cupons",
 	"Multicupon_D":"Multicupó",
-	"Multicupon":"Multicupó",
+	"Multicupon":"El meu Multicupó",
 	"MiChequeAhorro":"El meu XecEstalvi",
 	"Folleto":"Fullet",
 	"Lista":"Llista",
@@ -274,7 +274,7 @@ var lang_va = {
 	"donde_num_tarjeta_subtexto4":"Targeta client",
 	"donde_num_tarjeta_subtexto5":"Targeta empleat/autoritzat",
 	"Instalar esta app":"Instal·lar esta app",
-	"AHORAACUMULA":"ARA, ACUMULA en el teu XecEstalvi!",
+	"AHORAACUMULA":"ACUMULA en el teu XecEstalvi!",
 	"DescuentoACUMULA":"DESCOMPTE<br/>ACUMULA",
 	"EnviarEmail":"Enviar Email al suport",
 	"Asunto":"Assumpte",

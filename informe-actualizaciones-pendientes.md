@@ -161,6 +161,11 @@ Arquitectura real descubierta (tres copias distintas de la misma lógica):
 
 **Corrección 4 (misma sesión):** en algunos productos (ej. Colgate) la imagen se montaba encima del texto del título. Causa: la regla `.imagen_multicupon` limitaba el ancho a `max-width: 20vw` (un valor fijo relativo al viewport), no al ancho real de su columna — con una imagen de proporción más ancha de lo habitual, se salía de la columna `cup_qty` e invadía la columna del texto. Cambiado a `max-width: 100%`, que ata la imagen al ancho de su columna sin importar el tamaño de pantalla ni las proporciones de la foto concreta.
 
+**Corrección 5 (misma sesión, comparando vista móvil contra la app):**
+- La etiqueta "Descuento acumula" se veía en gris (sin color propio) y aparecía después de la descripción; en la app aparece en verde justo debajo del título. Se le dio color verde explícito (`#005e49`) en CSS y se movió su posición en el HTML a justo después del `<h3>` (antes de la descripción), en las dos funciones tocadas.
+- El encabezado decía "MULTICUPÓN"; en la app dice "Mi Multicupón" con un subtítulo en rojo "¡ACUMULA en tu ChequeAhorro!" debajo. Se actualizó la clave de idioma `Multicupon` (ya existía, solo desactualizada) en los tres idiomas, y se añadió el subtítulo usando la clave `AHORAACUMULA` (también ya existía pero con un texto distinto al de la app — se sincronizó) junto con una clase CSS nueva `.mensaje_multicupon` (roja, negrita) que tampoco existía en el dashboard.
+- **Se decidió NO cambiar** el contenedor de cada cupón (caja con borde verde discontinuo, `.recorte`) por el listado plano sin bordes que usa la app — es el estilo propio del dashboard (INSPINIA), compartido con otras pantallas, y cambiarlo aquí rompería la consistencia visual del resto del sitio.
+
 ### Cambios aplicados (primer intento, código muerto pero dejado tal cual) — `js/app.js`
 
 **`js/app.js`, función `obtener_vales`** (se modificó tanto el bloque `success` como el `error` — el dashboard duplica la lógica de pintado en ambos para poder mostrar una versión en caché si falla la petición, así que se mantuvieron sincronizados):

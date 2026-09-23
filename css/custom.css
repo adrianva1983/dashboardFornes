@@ -79,6 +79,11 @@ img.menu_izquierda{max-height:20px !important;max-width:20px !important;}
 .grup_cupones .tabler.multi {
     background: #eff5f4;
 }
+.mensaje_multicupon {
+    color: #FF0000;
+    font-weight: bold;
+    display: block;
+}
 .grup_cupones .tabler .cup_qty {    
    padding-right:0; 
    text-align: center;
@@ -1106,9 +1111,12 @@ button{
    y tarjeta propia del ChequeAhorro. Adaptado de css/custom.css de la app. */
 .bloque_cupon_acumula{
     font-size: 12px;
+    font-weight: bold;
+    color: #005e49;
     padding: 0px;
-    margin-top: 8px;
-    float: left;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    display: block;
 }
 .imagen_multicupon{
     width: auto;

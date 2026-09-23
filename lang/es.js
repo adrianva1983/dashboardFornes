@@ -26,7 +26,7 @@ var lang_es = {
 	//pagina-portada
 	"Cupones":"Cupones",
 	"Multicupon_D":"Multicupón",
-	"Multicupon":"Multicupón",
+	"Multicupon":"Mi Multicupón",
 	"MiChequeAhorro":"Mi ChequeAhorro",
 	"Folleto":"Folleto",
 	"Lista":"Lista",
@@ -274,7 +274,7 @@ var lang_es = {
 	"donde_num_tarjeta_subtexto4":"Tarjeta cliente",
 	"donde_num_tarjeta_subtexto5":"Tarjeta empleado/autorizado",
 	"Instalar esta app":"Instalar esta app",
-	"AHORAACUMULA":"¡AHORA, ACUMULA en tu ChequeAhorro!",
+	"AHORAACUMULA":"¡ACUMULA en tu ChequeAhorro!",
 	"DescuentoACUMULA":"DESCUENTO<br/>ACUMULA",
 	"EnviarEmail":"Enviar Email a soporte",
 	"Asunto":"Asunto",

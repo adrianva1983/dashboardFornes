@@ -26,7 +26,7 @@ var lang_en = {
 	//pagina-portada
 	"Cupones":"Vouchers",
 	"Multicupon_D":"Multicupón",
-	"Multicupon":"Multicupón",
+	"Multicupon":"My Multicupón",
 	"MiChequeAhorro":"My ChequeAhorro",
 	"Folleto":"Brochure",
 	"Lista":"List",
@@ -274,7 +274,7 @@ var lang_en = {
 	"donde_num_tarjeta_subtexto4":"Customer card",
 	"donde_num_tarjeta_subtexto5":"Employee/Authorised Card",
 	"Instalar esta app":"Install this app",
-	"AHORAACUMULA":"NOW, ACCUMULATE to your ChequeAhorro!",
+	"AHORAACUMULA":"ACCUMULATE to your ChequeAhorro!",
 	"DescuentoACUMULA":"DISCOUNT<br/>ACCUMULATE",
 	"EnviarEmail":"Send Email to support",
 	"Asunto":"Subject",
